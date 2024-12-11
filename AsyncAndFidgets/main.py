@@ -47,12 +47,15 @@ while running:
         count +=1
     playerchoice = input("Vybírám si: ")
     match playerchoice:
-        case "Bojovat":
+        case "Bojovat" | "1":
             asyncio.run(main(character))
-        case "Ukončit":
+        case "Ukončit" | "2":
             running = False
         case _:
             print("Špatná volba")
+    character.current_health = character.max_health
+    print(character.xp)
+    print(character.level)
 
 
 

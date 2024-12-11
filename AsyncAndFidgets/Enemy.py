@@ -1,10 +1,12 @@
 import asyncio
 from Entity import *
+import random
 
 class Enemy(Entity):
     def __init__(self,name,max_health,demage):
         Entity.__init__(self,name,max_health)
         self.demage = demage
+        self.xpgained = random.randint(250,800)
     
     async def attack(self):
         await asyncio.sleep(1)
