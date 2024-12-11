@@ -19,9 +19,6 @@ async def battle(wizard,enemy):
     elif(enemy.current_health <=0):
         print(f"hrac {wizard.name} vyhral")
 
-async def main():
-    w = Wizard("nekdo")
+async def main(w):
     e = Enemy("lupič",100,10)
     await asyncio.gather(battle(w,e))
-
-asyncio.run(main())

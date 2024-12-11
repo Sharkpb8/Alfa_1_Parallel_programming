@@ -10,15 +10,6 @@ class Wizard(Player):
     async def Fireball(self):
         await asyncio.sleep(2*self.fireballcooldown)
         return self.Fireballdemage
-    
-    async def takedemage(self,demage):
-        self.current_health -= demage
-
-    def __str__(self):
-        if(self.current_health <=0):
-            return f"Hráč {self.name} je mrtvý"
-        else:
-            return f"Hráč {self.name} má {self.current_health} životů"
         
     
     

@@ -11,3 +11,6 @@ class Entity:
             self.max_health = 100
         self.current_health = self.max_health
 
+    async def takedemage(self,demage):
+        self.current_health -= demage
+

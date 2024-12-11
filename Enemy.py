@@ -10,9 +10,6 @@ class Enemy(Entity):
         await asyncio.sleep(1)
         return self.demage
     
-    async def takedemage(self,demage):
-        self.current_health -= demage
-    
     def __str__(self):
         if(self.current_health <= 0):
             return f"Nepřítel {self.name} je mrtvý"
