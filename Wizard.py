@@ -1,9 +1,9 @@
-from Person import *
+from Player import *
 import asyncio
 
-class Wizard(Person):
+class Wizard(Player):
     def __init__(self, username):
-        super().__init__(username,"Wizard")
+        Player.__init__(self,username,70,"Wizard")
         self.fireballcooldown = 1
         self.Fireballdemage = 30
     
