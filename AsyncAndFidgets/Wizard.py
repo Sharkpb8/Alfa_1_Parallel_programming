@@ -4,11 +4,13 @@ import asyncio
 class Wizard(Player):
     def __init__(self, username):
         Player.__init__(self,username,70,"Wizard")
-        self.fireballcooldown = 1
+        self.fireballcooldown = 2
         self.Fireballdemage = 30
     
     async def Fireball(self):
-        await asyncio.sleep(2*self.fireballcooldown)
+        cooldown = self.fireballcooldown*(1-0.1*(self.level-1))
+        print(cooldown)
+        await asyncio.sleep(cooldown)
         return self.Fireballdemage
         
     

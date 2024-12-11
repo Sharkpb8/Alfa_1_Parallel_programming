@@ -28,7 +28,7 @@ async def battle(wizard,enemy):
     elif(enemy.current_health <=0):
         print(f"Hrac {wizard.name} vyhral")
         wizard.addxp(enemy.xpgained)
-        f.write(f"{gettime()}: hráč {wizard.name} získal {enemy.xpgained}xp")
+        f.write(f"{gettime()}: hrac {wizard.name} ziskal {enemy.xpgained}xp\n")
         f.write(f"{gettime()}: souboj vyhrrl hrac {wizard.name}\n")
     f.close()
 

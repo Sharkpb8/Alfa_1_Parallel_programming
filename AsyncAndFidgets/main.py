@@ -57,5 +57,13 @@ while running:
     print(character.xp)
     print(character.level)
 
-
+# todo
+# save
+# pvp
+# multiple enemi fight
+# json config
+# load
+# other classes
+# unit testing
+# api enemy name
 
