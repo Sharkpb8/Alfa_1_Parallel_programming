@@ -13,8 +13,8 @@ class Enemy(Entity):
     async def takedemage(self,demage):
         self.current_health -= demage
     
-    def current_hp(self):
-        if(self.current_health <=0):
-            return f"enemy je mrtvý"
+    def __str__(self):
+        if(self.current_health <= 0):
+            return f"Nepřítel {self.name} je mrtvý"
         else:
-            return f"enemy má {self.current_health}"
+            return f"Nepřítel {self.name} má {self.current_health} životů"

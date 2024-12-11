@@ -13,11 +13,12 @@ class Wizard(Player):
     
     async def takedemage(self,demage):
         self.current_health -= demage
-    
-    def current_hp(self):
+
+    def __str__(self):
         if(self.current_health <=0):
-            return f"hráč je mrtvý"
+            return f"Hráč {self.name} je mrtvý"
         else:
-            return f"hráč má {self.current_health}"
+            return f"Hráč {self.name} má {self.current_health} životů"
+        
     
     
