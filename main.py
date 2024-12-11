@@ -38,4 +38,21 @@ playerchoice = Chooseclass()
 username = input("Zadejte jmeno postavy: ")
 character = createcharacter(playerchoice,username)
 
-asyncio.run(main(character))
+running = True
+while running:
+    options = ["Bojovat","Ukončit"]
+    count =1
+    for i in options:
+        print(f"{count}. {i}")
+        count +=1
+    playerchoice = input("Vybírám si: ")
+    match playerchoice:
+        case "Bojovat":
+            asyncio.run(main(character))
+        case "Ukončit":
+            running = False
+        case _:
+            print("Špatná volba")
+
+
+
