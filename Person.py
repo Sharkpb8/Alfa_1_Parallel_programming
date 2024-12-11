@@ -1,6 +1,6 @@
 class Person:
     def __init__(self,username,playerclass):
-        if(not isinstance(str,username)):
+        if(not isinstance(username,str)):
             raise TypeError
         self.username = username
         self.playerclass = playerclass
