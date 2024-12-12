@@ -2,10 +2,12 @@ from Entity import *
 
 class Player(Entity):
     def __init__(self,username,max_health,playerclass):
+        Entity.__init__(self,username,max_health)
+        if(not isinstance(playerclass,str)):
+            raise TypeError
         self.playerclass = playerclass
         self.xp = 0
         self.level = 1
-        Entity.__init__(self,username,max_health)
 
     def addxp(self,ammount):
         if(not isinstance(ammount,int)):

@@ -3,7 +3,9 @@ class Entity:
         if(not isinstance(name,str)):
             raise TypeError
         self.name = name
-        if(not isinstance(max_health,int) or max_health <= 0):
+        if(not isinstance(max_health,int)):
+            raise TypeError
+        if(max_health < 1):
             raise ValueError
         if(max_health):
             self.max_health = max_health
@@ -14,6 +16,6 @@ class Entity:
     async def takedemage(self,demage):
         if(not isinstance(demage,int)):
             raise TypeError
-        if(demage <0):
+        if(demage <1):
             raise ValueError
         self.current_health -= demage
