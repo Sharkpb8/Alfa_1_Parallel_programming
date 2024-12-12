@@ -54,8 +54,6 @@ while running:
         case _:
             print("Špatná volba")
     character.current_health = character.max_health
-    print(character.xp)
-    print(character.level)
 
 # todo
 # save

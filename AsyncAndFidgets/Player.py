@@ -12,8 +12,9 @@ class Player(Entity):
             raise TypeError
         if(ammount <0):
             raise ValueError
-        if(self.xp+ammount >1000):
+        if(self.xp+ammount >=1000):
             self.level +=1
+            self.max_health *= 1.1
             self.xp += ammount-1000
         else:
             self.xp +=ammount 

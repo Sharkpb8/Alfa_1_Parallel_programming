@@ -12,5 +12,8 @@ class Entity:
         self.current_health = self.max_health
 
     async def takedemage(self,demage):
+        if(not isinstance(demage,int)):
+            raise TypeError
+        if(demage <0):
+            raise ValueError
         self.current_health -= demage
-
