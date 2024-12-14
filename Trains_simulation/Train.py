@@ -21,5 +21,8 @@ class Train():
         self.train_number = train_number
         self.tracks = tracks
     
+    def addstation(self,name):
+        self.tracks.addtail(name)
+    
     def __str__(self):
-        return f"Vlak: {self.type} {self.train_number} ma zastavky NOT IMPLEMENTED"
+        return f"Vlak: {self.type} {self.train_number} {self.tracks}"

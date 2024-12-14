@@ -48,26 +48,59 @@ def addtrain():
     t = Train(newtrain["type"],newtrain["train_number"],LinkedList())
     return t
 
+
+def addstation(list):
+    optionpicked = False
+    while not optionpicked:
+        print("Pro který vlak chce přidat stanici ?")
+        count =1
+        for i in list:
+            print(f"{count}. {list[count-1].type}{list[count-1].train_number}")
+            count +=1
+        choice = input("Vybírám si: ")
+        try:
+            numberchoise = int(choice)
+            t = list[numberchoise-1]
+            station = input("Jmeno zastavky: ")
+            t.addstation(station)
+            break
+        except ValueError:
+            # trainlist = []
+            # for i in list:
+            #     trainlist.append(f"{list[count-1].type}{list[count-1].train_number}")
+            # if(choice in trainlist):
+            #     t = list[numberchoise-1]
+            #     break
+            print("dej tam cislo jsem linej to tet implementovat")
+        print("Špatná volba")
+    
+
+
         
     
 
 running = True
 trainlist = []
 while running:
-    options = ["Pridat vlak","Vypis valku","Ukončit"]
+    options = ["Pridat vlak","Přidat zastavku vlaku","Výpis vlaku","Ukončit"]
     showoptions(options)
     choice = input("Vybírám si: ")
     match choice:
         case "Pridat vlak" | "1":
             t = addtrain()
             trainlist.append(t)
-        case "Vypis valku" | "2":
+        case "Přidat zastavku vlaku" | "2":
+            if(len(trainlist) == 0):
+                print("Žádny vlaky nebyly vytvořeny")
+            else:
+                station = addstation(trainlist)
+        case "Vypis vlaku" | "3":
             if(len(trainlist) == 0):
                 print("Žádny vlaky nebyly vytvořeny")
             else:
                 for i in trainlist:
                     print(i)
-        case "Ukončit" | "3":
+        case "Ukončit" | "0":
             running = False
         case _:
             print("Špatná volba")

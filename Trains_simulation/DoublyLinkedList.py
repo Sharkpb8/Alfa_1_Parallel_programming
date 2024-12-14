@@ -88,6 +88,16 @@ class LinkedList():
             MyData.append(this_node.get_data())
             this_node = this_node.get_next()
         return MyData
+    def __str__(self):
+        MyString = ""
+        this_node = self.tail
+        while this_node:
+            MyString += f"{this_node.get_data()}, "
+            this_node = this_node.get_next()
+        if(MyString == ""):
+            return "nemá stanice"
+        else:
+            return "ma stanice "+MyString[:-2]
 
     
 # MyList = LinkedList()
