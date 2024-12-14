@@ -5,6 +5,10 @@ import random
 class Enemy(Entity):
     def __init__(self,name,max_health,demage):
         Entity.__init__(self,name,max_health)
+        if(not isinstance(demage,int)):
+            raise TypeError
+        if(demage<1):
+            raise ValueError
         self.demage = demage
         self.xpgained = random.randint(250,800)
     
