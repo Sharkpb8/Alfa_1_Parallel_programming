@@ -72,14 +72,14 @@ class LinkedList():
                 this_node = this_node.get_next()
         return False
     
-    def Find(self,data):
-        this_node = self.head
-        while this_node:
-            if this_node.get_data() == data:
-                return data
-            else:
-                this_node = this_node.get_next()
-        return None
+    # def Find(self,data):
+    #     this_node = self.head
+    #     while this_node:
+    #         if this_node.get_data() == data:
+    #             return data
+    #         else:
+    #             this_node = this_node.get_next()
+    #     return None
     
     def FindAll(self):
         MyData = []
@@ -90,14 +90,14 @@ class LinkedList():
         return MyData
 
     
-MyList = LinkedList()
-MyList.addtail(5)
-MyList.addtail(8)
-MyList.addtail(12) 
-MyList.addhead(9)
-print(MyList.head.get_data())
-print(MyList.tail.get_data())
-print(MyList.FindAll())
+# MyList = LinkedList()
+# MyList.addtail(5)
+# MyList.addtail(8)
+# MyList.addtail(12) 
+# MyList.addhead(9)
+# print(MyList.head.get_data())
+# print(MyList.tail.get_data())
+# print(MyList.FindAll())
 
 
 
