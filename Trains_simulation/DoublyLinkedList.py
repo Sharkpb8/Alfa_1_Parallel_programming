@@ -3,6 +3,11 @@ class  Node():
         self.data = data
         self.prev_node = prev_node
         self.next_node = next_node
+        #time add 
+        #if station is first set it to 0
+        #it will be measured as time to get to that station from the station before
+        #input will be dictionary from json 
+        #UI input will be handled later
 
     def get_next(self):
         return self.next_node
@@ -101,7 +106,7 @@ class LinkedList():
             return {"from":this_node.get_data(),"to":self.current.get_data()}
         else:
             self.reverse = False
-            return {"from":this_node.get_data(),"to":this_node.get_data()}
+            return None
 
 
 
