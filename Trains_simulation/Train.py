@@ -30,5 +30,8 @@ class Train():
     def getallstations(self):
         return self.tracks.FindAll()
     
+    def movetrain(self):
+        return self.tracks.moveforward()
+    
     def __str__(self):
         return f"Vlak: {self.type} {self.train_number} {self.tracks}"
