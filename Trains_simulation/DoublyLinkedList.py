@@ -60,17 +60,21 @@ class LinkedList():
             if this_node.get_data() == data:
                 next = this_node.get_next()
                 prev = this_node.get_prev()
-                if next:
-                    next.set_prev(prev)
-                if prev:
-                    next.set_next(next)
-                else:
-                    self.head = this_node
+                if next and prev:
+                    prev.set_next(this_node.get_next())
+                    next.set_prev(this_node.get_prev())
+                elif not next and not prev:
+                    self.tail = None
+                    self.head = None
+                elif not next:
+                    prev.set_next(this_node.get_next())
+                    self.head = prev
+                elif not prev:
+                    self.tail = this_node.get_next()
                 self.size -= 1
-                return True
+                break
             else:
-                this_node = this_node.get_next()
-        return False
+                this_node = this_node.get_prev()
     
     # def Find(self,data):
     #     this_node = self.head
@@ -105,6 +109,7 @@ class LinkedList():
 # MyList.addtail(8)
 # MyList.addtail(12) 
 # MyList.addhead(9)
+# MyList.remove(12)
 # print(MyList.head.get_data())
 # print(MyList.tail.get_data())
 # print(MyList.FindAll())

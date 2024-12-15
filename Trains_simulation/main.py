@@ -13,6 +13,12 @@ def showoptions(list):
         print(f"{count}. {i}")
         count +=1
 
+def showotrainptions(trainlist):
+    count =1
+    for i in trainlist:
+        print(f"{count}. {trainlist[count-1].type}{trainlist[count-1].train_number}")
+        count +=1
+
 def addtrain():
     config = openjson()
     allowedtypes = config["allowedtypes"]
@@ -53,10 +59,7 @@ def addstation(trainlist):
     optionpicked = False
     while not optionpicked:
         print("Pro který vlak chce přidat stanici ?")
-        count =1
-        for i in trainlist:
-            print(f"{count}. {trainlist[count-1].type}{trainlist[count-1].train_number}")
-            count +=1
+        showotrainptions(trainlist)
         choice = input("Vybírám si: ")
         try:
             numberchoise = int(choice)
@@ -66,10 +69,7 @@ def addstation(trainlist):
             break
         except ValueError:
             temptrainlist = []
-            count = 0
-            for i in trainlist:
-                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
-                count +=1
+            showotrainptions(trainlist)
             count = 0
             for i in temptrainlist:
                 if(choice == i):
@@ -82,8 +82,81 @@ def addstation(trainlist):
             # print("dej tam cislo jsem linej to tet implementovat")
         if(not optionpicked):
             print("Špatná volba")
-    
 
+def deletetrain(trainlist):
+    optionpicked = False
+    while not optionpicked:
+        print("Který vlak chcete smazat?")
+        showotrainptions(trainlist)
+        choice = input("Vybírám si: ")
+        try:
+            numberchoise = int(choice)
+            del trainlist[numberchoise-1]
+            return trainlist
+        except ValueError:
+            temptrainlist = []
+            count = 0
+            for i in trainlist:
+                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
+                count +=1
+            count = 0
+            for i in temptrainlist:
+                if(choice == i):
+                    del trainlist[count]
+                    return trainlist
+                else:
+                    count +=1
+            # print("dej tam cislo jsem linej to tet implementovat")
+        print("Špatná volba")
+    
+def removestation(trainlist):
+    optionpicked = False
+    while not optionpicked:
+        print("Pro který vlak chce smazat stanici ?")
+        showotrainptions(trainlist)
+        choice = input("Vybírám si: ")
+        try:
+            numberchoise = int(choice)
+            t = trainlist[numberchoise-1]
+            stations = t.getallstations()
+            showoptions(stations)
+            choice = input("Vybírám si: ")
+            try:
+                numberchoise = int(choice)
+                t.removestation(stations[numberchoise-1])
+                break
+            except ValueError:
+                if(choice in stations):
+                    t.removestation(choice)
+                    break
+        except ValueError:
+            temptrainlist = []
+            count = 0
+            for i in trainlist:
+                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
+                count +=1
+            count = 0
+            for i in temptrainlist:
+                if(choice == i):
+                    t = trainlist[count]
+                    stations = t.getallstations()
+                    showoptions(stations)
+                    choice = input("Vybírám si: ")
+                    try:
+                        numberchoise = int(choice)
+                        t.removestation(stations[numberchoise-1])
+                        optionpicked = True
+                        break
+                    except ValueError:
+                        if(choice in stations):
+                            t.removestation(choice)
+                            optionpicked = True
+                            break
+                else:
+                    count +=1
+            # print("dej tam cislo jsem linej to tet implementovat")
+        if(not optionpicked):
+            print("Špatná volba")
 
         
     
@@ -99,14 +172,15 @@ while running:
             t = addtrain()
             trainlist.append(t)
         case "Smazat vlak" | "2":
-            raise NotImplementedError
+            deletetrain(trainlist)
         case "Přidat zastavku vlaku" | "3":
             if(len(trainlist) == 0):
                 print("Žádny vlaky nebyly vytvořeny")
             else:
                 station = addstation(trainlist)
         case "Smazat zastavku vlaku" | "4":
-            raise NotImplementedError
+            # raise NotImplementedError
+            removestation(trainlist)
         case "Vypis vlaku" | "5":
             if(len(trainlist) == 0):
                 print("Žádny vlaky nebyly vytvořeny")

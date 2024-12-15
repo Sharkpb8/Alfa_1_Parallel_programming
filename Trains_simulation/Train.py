@@ -24,5 +24,11 @@ class Train():
     def addstation(self,name):
         self.tracks.addtail(name)
     
+    def removestation(self,name):
+        self.tracks.remove(name)
+    
+    def getallstations(self):
+        return self.tracks.FindAll()
+    
     def __str__(self):
         return f"Vlak: {self.type} {self.train_number} {self.tracks}"
