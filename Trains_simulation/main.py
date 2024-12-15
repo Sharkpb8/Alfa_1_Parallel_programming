@@ -2,6 +2,7 @@ from Train import *
 from Error import *
 from simulation import *
 import json
+import asyncio
 
 def openjson():
     with open('./Trains_simulation/config.json', 'r') as j:
@@ -160,13 +161,24 @@ def removestation(trainlist):
             print("Špatná volba")
 
 def load(trainlist):
-    with open("./Trains_simulation/trains.json","r",encoding="utf-8") as j:
-        list = json.load(j)
-        for i in list:
-            t = Train(i["typ_vlaku"],i["cislo_vlaku"],LinkedList())
-            trainlist.append(t)
-            for x in i["stanice"]:
-                t.addstation(x)
+    try:
+        with open("./Trains_simulation/trains.json","r",encoding="utf-8") as j:
+            loadlist = json.load(j)
+            if(len(loadlist) == 0):
+                return print("V souboru trains.json se nic nenachází")
+            for i in loadlist:
+                if("typ_vlaku"not in i or "cislo_vlaku" not in i):
+                    raise FormatError
+                if("stanice" not in i or not isinstance(i["stanice"], list)):
+                    raise FormatError
+                t = Train(i["typ_vlaku"],i["cislo_vlaku"],LinkedList())
+                trainlist.append(t)
+                for x in i["stanice"]:
+                    t.addstation(x)
+    except json.JSONDecodeError:
+        print("Špatný format souboru trains.json")
+    except FormatError:
+        print("Format vlaku je špatný")
         
     
 
@@ -199,7 +211,7 @@ while running:
             if(len(trainlist) == 0):
                 print("Žádny vlaky nebyly vytvořeny")
             else:
-                Start(trainlist)
+                asyncio.run(main(trainlist))
         case "Načíst ze souboru" | "7":
             load(trainlist)
         case "Ukončit" | "8":
