@@ -10,7 +10,7 @@ class Train():
             config = json.load(j)
             allowedtypes = config["allowedtypes"]
         if(type not in allowedtypes):
-            raise ValueError
+            raise TrainTypeError
         if(not isinstance(train_number,int)):
             raise TypeError
         if(train_number < 1000 and train_number > 9999):
@@ -29,6 +29,9 @@ class Train():
     
     def getallstations(self):
         return self.tracks.FindAll()
+    
+    def gettrackssize(self):
+        return self.tracks.get_size()
     
     def movetrain(self):
         return self.tracks.moveforward()

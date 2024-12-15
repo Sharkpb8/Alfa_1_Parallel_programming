@@ -10,14 +10,13 @@ def openjson():
          
 
 async def sendtrain(t):
-    for i in t.getallstations():
+    for i in range(t.gettrackssize()*2-2):
         road = t.movetrain()
         config = openjson()
-        print(f"vlak {t.type} {t.train_number} odjel z {road['from']}")
+        print(f"vlak {t.type} {t.train_number} odjel z - {road['from']}")
         await asyncio.sleep(1)
         if(random.randint(1,100)<=config["delay-chance"]):
             print("vlak ma spozdeni")
-            print(f"{config['mimimum-delay']}, {config['maximum-delay']}")
             delay = round(random.uniform(config['mimimum-delay'], config['maximum-delay']), 2)
             print(delay)
             await asyncio.sleep(delay)
