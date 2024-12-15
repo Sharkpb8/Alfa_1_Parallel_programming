@@ -49,30 +49,39 @@ def addtrain():
     return t
 
 
-def addstation(list):
+def addstation(trainlist):
     optionpicked = False
     while not optionpicked:
         print("Pro který vlak chce přidat stanici ?")
         count =1
-        for i in list:
-            print(f"{count}. {list[count-1].type}{list[count-1].train_number}")
+        for i in trainlist:
+            print(f"{count}. {trainlist[count-1].type}{trainlist[count-1].train_number}")
             count +=1
         choice = input("Vybírám si: ")
         try:
             numberchoise = int(choice)
-            t = list[numberchoise-1]
+            t = trainlist[numberchoise-1]
             station = input("Jmeno zastavky: ")
             t.addstation(station)
             break
         except ValueError:
-            trainlist = []
-            for i in list:
-                trainlist.append(f"{list[count-1].type}{list[count-1].train_number}")
-            if(choice in trainlist):
-                t = list[numberchoise-1]
-                break
+            temptrainlist = []
+            count = 0
+            for i in trainlist:
+                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
+                count +=1
+            count = 0
+            for i in temptrainlist:
+                if(choice == i):
+                    t = trainlist[count]
+                    station = input("Jmeno zastavky: ")
+                    t.addstation(station)
+                    optionpicked = True
+                else:
+                    count +=1
             # print("dej tam cislo jsem linej to tet implementovat")
-        print("Špatná volba")
+        if(not optionpicked):
+            print("Špatná volba")
     
 
 
