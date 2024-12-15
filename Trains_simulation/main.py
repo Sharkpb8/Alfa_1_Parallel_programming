@@ -1,5 +1,6 @@
 from Train import *
 from Error import *
+from simulation import *
 import json
 
 def openjson():
@@ -158,13 +159,21 @@ def removestation(trainlist):
         if(not optionpicked):
             print("Špatná volba")
 
+def load(trainlist):
+    with open("./Trains_simulation/trains.json","r",encoding="utf-8") as j:
+        list = json.load(j)
+        for i in list:
+            t = Train(i["typ_vlaku"],i["cislo_vlaku"],LinkedList())
+            trainlist.append(t)
+            for x in i["stanice"]:
+                t.addstation(x)
         
     
 
 running = True
 trainlist = []
 while running:
-    options = ["Pridat vlak","Smazat vlak","Přidat zastavku vlaku","Smazat zastavku vlaku","Výpis vlaku","Spustit simulaci","Ukončit"]
+    options = ["Pridat vlak","Smazat vlak","Přidat zastavku vlaku","Smazat zastavku vlaku","Výpis vlaku","Spustit simulaci","Načíst ze souboru","Ukončit"]
     showoptions(options)
     choice = input("Vybírám si: ")
     match choice:
@@ -179,7 +188,6 @@ while running:
             else:
                 station = addstation(trainlist)
         case "Smazat zastavku vlaku" | "4":
-            # raise NotImplementedError
             removestation(trainlist)
         case "Vypis vlaku" | "5":
             if(len(trainlist) == 0):
@@ -188,8 +196,14 @@ while running:
                 for i in trainlist:
                     print(i)
         case "Spustit simulaci" | "6":
-            raise NotImplementedError
-        case "Ukončit" | "7":
+            if(len(trainlist) == 0):
+                print("Žádny vlaky nebyly vytvořeny")
+            else:
+                Start(trainlist)
+        case "Načíst ze souboru" | "7":
+            load(trainlist)
+        case "Ukončit" | "8":
             running = False
         case _:
             print("Špatná volba")
+    print("")

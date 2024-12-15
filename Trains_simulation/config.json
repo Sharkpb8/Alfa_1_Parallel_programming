@@ -1,3 +1,8 @@
 {
-    "allowedtypes": ["R","Ex","S6","S7"]
+    "allowedtypes": ["R","Ex","S6","S7"],
+    "simulation":{
+        "mimimum-delay": 1,
+        "maximum-delay": 10,
+        "delay-chance":40
+    }
 }

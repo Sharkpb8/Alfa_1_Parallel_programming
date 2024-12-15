@@ -1,0 +1,53 @@
+[
+    {
+      "typ_vlaku": "R",
+      "cislo_vlaku": 1234,
+      "stanice": ["Praha", "Brno", "Ostrava", "Olomouc"]
+    },
+    {
+      "typ_vlaku": "Ex",
+      "cislo_vlaku": 4567,
+      "stanice": ["Plzeň", "České Budějovice", "Hradec Králové", "Pardubice"]
+    },
+    {
+      "typ_vlaku": "S6",
+      "cislo_vlaku": 7890,
+      "stanice": ["Liberec", "Ústí nad Labem", "Děčín", "Most"]
+    },
+    {
+      "typ_vlaku": "S7",
+      "cislo_vlaku": 2345,
+      "stanice": ["Karlovy Vary", "Cheb", "Mariánské Lázně", "Františkovy Lázně"]
+    },
+    {
+      "typ_vlaku": "R",
+      "cislo_vlaku": 6789,
+      "stanice": ["Kladno", "Mladá Boleslav", "Kolín", "Nymburk"]
+    },
+    {
+      "typ_vlaku": "Ex",
+      "cislo_vlaku": 3456,
+      "stanice": ["Zlín", "Uherské Hradiště", "Vsetín", "Břeclav"]
+    },
+    {
+      "typ_vlaku": "S6",
+      "cislo_vlaku": 8912,
+      "stanice": ["Třebíč", "Žďár nad Sázavou", "Havlíčkův Brod", "Jihlava"]
+    },
+    {
+      "typ_vlaku": "S7",
+      "cislo_vlaku": 5678,
+      "stanice": ["Opava", "Krnov", "Jeseník", "Šumperk"]
+    },
+    {
+      "typ_vlaku": "R",
+      "cislo_vlaku": 9101,
+      "stanice": ["Chomutov", "Teplice", "Litoměřice", "Lovosice"]
+    },
+    {
+      "typ_vlaku": "Ex",
+      "cislo_vlaku": 1123,
+      "stanice": ["Tábor", "Písek", "Strakonice", "Klatovy"]
+    }
+  ]
+  
