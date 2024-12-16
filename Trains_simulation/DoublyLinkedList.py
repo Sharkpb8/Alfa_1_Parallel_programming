@@ -67,6 +67,7 @@ class LinkedList():
         else:
             self.head = new_node
             self.tail = new_node
+        self.current = self.tail
         self.size += 1
     
     def remove(self,data):
@@ -99,7 +100,7 @@ class LinkedList():
         if(not self.reverse):
             if(next is not None and next.get_data()):
                     self.current = self.current.get_next()
-                    return {"from":this_node.get_data(),"to":self.current.get_data()}
+                    return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":next.get_distance()}
             else:                
                 self.reverse = True
                 return self.movebackward(this_node)
@@ -110,7 +111,7 @@ class LinkedList():
         prev = this_node.get_prev()
         if(prev is not None and prev.get_data()):
             self.current = self.current.get_prev()
-            return {"from":this_node.get_data(),"to":self.current.get_data()}
+            return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance()}
         else:
             self.reverse = False
             return None

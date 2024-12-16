@@ -14,7 +14,8 @@ async def sendtrain(t):
         road = t.movetrain()
         config = openjson()
         print(f"vlak {t.type} {t.train_number} odjel z - {road['from']}")
-        await asyncio.sleep(1)
+        traveltime = road["distance"]/t.speed
+        await asyncio.sleep(traveltime)
         if(random.randint(1,100)<=config["delay-chance"]):
             print("vlak ma spozdeni")
             delay = round(random.uniform(config['mimimum-delay'], config['maximum-delay']), 2)
