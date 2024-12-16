@@ -6,3 +6,5 @@ class TrainTypeError(Exception):
     pass
 class SpeedError(Exception):
     pass
+class CapacityError(Exception):
+    pass

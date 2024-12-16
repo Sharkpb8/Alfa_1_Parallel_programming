@@ -3,110 +3,12 @@
     "typ_vlaku": "R",
     "cislo_vlaku": 1234,
     "rychlost": 80,
+    "kapacita": 300,
     "stanice": [
       {"jmeno": "Praha", "vzdalenost": 0},
       {"jmeno": "Brno", "vzdalenost": 205},
       {"jmeno": "Ostrava", "vzdalenost": 279},
       {"jmeno": "Olomouc", "vzdalenost": 92}
-    ]
-  },
-  {
-    "typ_vlaku": "Ex",
-    "cislo_vlaku": 4567,
-    "rychlost": 120,
-    "stanice": [
-      {"jmeno": "Plzeň", "vzdalenost": 0},
-      {"jmeno": "České Budějovice", "vzdalenost": 113},
-      {"jmeno": "Hradec Králové", "vzdalenost": 136},
-      {"jmeno": "Pardubice", "vzdalenost": 22}
-    ]
-  },
-  {
-    "typ_vlaku": "S6",
-    "cislo_vlaku": 7890,
-    "rychlost": 60,
-    "stanice": [
-      {"jmeno": "Liberec", "vzdalenost": 0},
-      {"jmeno": "Ústí nad Labem", "vzdalenost": 91},
-      {"jmeno": "Děčín", "vzdalenost": 24},
-      {"jmeno": "Most", "vzdalenost": 54}
-    ]
-  },
-  {
-    "typ_vlaku": "S7",
-    "cislo_vlaku": 2345,
-    "rychlost": 70,
-    "stanice": [
-      {"jmeno": "Karlovy Vary", "vzdalenost": 0},
-      {"jmeno": "Cheb", "vzdalenost": 46},
-      {"jmeno": "Mariánské Lázně", "vzdalenost": 30},
-      {"jmeno": "Františkovy Lázně", "vzdalenost": 11}
-    ]
-  },
-  {
-    "typ_vlaku": "R",
-    "cislo_vlaku": 6789,
-    "rychlost": 90,
-    "stanice": [
-      {"jmeno": "Kladno", "vzdalenost": 0},
-      {"jmeno": "Mladá Boleslav", "vzdalenost": 42},
-      {"jmeno": "Kolín", "vzdalenost": 48},
-      {"jmeno": "Nymburk", "vzdalenost": 21}
-    ]
-  },
-  {
-    "typ_vlaku": "Ex",
-    "cislo_vlaku": 3456,
-    "rychlost": 100,
-    "stanice": [
-      {"jmeno": "Zlín", "vzdalenost": 0},
-      {"jmeno": "Uherské Hradiště", "vzdalenost": 30},
-      {"jmeno": "Vsetín", "vzdalenost": 42},
-      {"jmeno": "Břeclav", "vzdalenost": 55}
-    ]
-  },
-  {
-    "typ_vlaku": "S6",
-    "cislo_vlaku": 8912,
-    "rychlost": 50,
-    "stanice": [
-      {"jmeno": "Třebíč", "vzdalenost": 0},
-      {"jmeno": "Žďár nad Sázavou", "vzdalenost": 39},
-      {"jmeno": "Havlíčkův Brod", "vzdalenost": 43},
-      {"jmeno": "Jihlava", "vzdalenost": 25}
-    ]
-  },
-  {
-    "typ_vlaku": "S7",
-    "cislo_vlaku": 5678,
-    "rychlost": 60,
-    "stanice": [
-      {"jmeno": "Opava", "vzdalenost": 0},
-      {"jmeno": "Krnov", "vzdalenost": 19},
-      {"jmeno": "Jeseník", "vzdalenost": 66},
-      {"jmeno": "Šumperk", "vzdalenost": 43}
-    ]
-  },
-  {
-    "typ_vlaku": "R",
-    "cislo_vlaku": 9101,
-    "rychlost": 80,
-    "stanice": [
-      {"jmeno": "Chomutov", "vzdalenost": 0},
-      {"jmeno": "Teplice", "vzdalenost": 35},
-      {"jmeno": "Litoměřice", "vzdalenost": 53},
-      {"jmeno": "Lovosice", "vzdalenost": 20}
-    ]
-  },
-  {
-    "typ_vlaku": "Ex",
-    "cislo_vlaku": 1123,
-    "rychlost": 110,
-    "stanice": [
-      {"jmeno": "Tábor", "vzdalenost": 0},
-      {"jmeno": "Písek", "vzdalenost": 34},
-      {"jmeno": "Strakonice", "vzdalenost": 19},
-      {"jmeno": "Klatovy", "vzdalenost": 48}
     ]
   }
 ]

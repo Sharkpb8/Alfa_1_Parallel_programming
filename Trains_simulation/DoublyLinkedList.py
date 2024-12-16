@@ -45,6 +45,16 @@ class LinkedList():
     def get_size(self):
         return self.size
     
+    #finish and add to addtail and addheadfo unique stations
+    def Find(self,data):
+        this_node = self.head
+        while this_node:
+            if this_node.get_data() == data:
+                return data
+            else:
+                this_node = this_node.get_next()
+        return None
+    
     def addtail(self,data,distance):
         new_node = Node(data,distance,self.head)
         if self.head:
@@ -87,8 +97,9 @@ class LinkedList():
                     self.head = prev
                 elif not prev:
                     self.tail = this_node.get_next()
-                    next.set_prev(self.tail)
+                    next.set_prev(None)
                     self.current = self.tail
+                    self.tail.set_distance(0)
                 self.size -= 1
                 break
             else:
@@ -114,18 +125,11 @@ class LinkedList():
             return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance()}
         else:
             self.reverse = False
-            return None
-
-
-
-    # def Find(self,data):
-    #     this_node = self.head
-    #     while this_node:
-    #         if this_node.get_data() == data:
-    #             return data
-    #         else:
-    #             this_node = this_node.get_next()
-    #     return None
+            self.current = self.tail
+            return self.moveforward()
+    
+    def current_station(self):
+        return self.current.get_data()
     
     def FindAll(self):
         MyData = []

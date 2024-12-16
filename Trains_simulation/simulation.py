@@ -22,6 +22,28 @@ async def sendtrain(t):
             print(delay)
             await asyncio.sleep(delay)
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
+        await asyncio.gather(loadpassangers(t))
+
+async def loadpassangers(t):
+    stations = t.getallstations()
+    followingstations = t.trainposition()
+    if(not followingstations["direction"]):
+        stations.remove(followingstations["current_station"])
+        destination = random.choice(stations)
+        print(destination)
+    else:
+        # print("stanice aktualni ",followingstations["current_station"])
+        index = stations.index(followingstations["current_station"])
+        if(index == 0):
+            return None
+        # print("index",str(index))
+        avaiablestatiosn = []
+        for i in range(index):
+            avaiablestatiosn.append(stations[i])
+            # print("pridano",str(stations[i]))
+        destination = random.choice(list(avaiablestatiosn))
+        print(destination)
+    t.addpassangers(1)
 
 async def main(trainlist):
     await asyncio.gather(*(sendtrain(t) for t in trainlist))

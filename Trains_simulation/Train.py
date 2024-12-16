@@ -3,7 +3,7 @@ from Error import *
 import json
 
 class Train():
-    def __init__(self,type,train_number,speed,tracks):
+    def __init__(self,type,train_number,speed,capacity,tracks):
         if(not isinstance(type,str)):
             raise ValueError
         with open("./Trains_simulation/config.json","r") as j:
@@ -21,9 +21,15 @@ class Train():
             raise TypeError
         if(speed<=0):
             raise SpeedError
+        if(not isinstance(capacity,int)):
+            raise TypeError
+        if(capacity<=0):
+            raise CapacityError
         self.type = type
         self.train_number = train_number
         self.speed = speed
+        self.capacity = capacity
+        self.current_passangers = []
         self.tracks = tracks
     
     def addstation(self,name,distance):
@@ -40,6 +46,16 @@ class Train():
     
     def movetrain(self):
         return self.tracks.moveforward()
+    
+    def trainposition(self):
+        return {"current_station":self.tracks.current_station(),"direction":self.tracks.reverse}
+    
+    def addpassangers(self,passanger):
+        if(len(self.current_passangers)+1>self.capacity):
+            return False
+        else:
+            self.current_passangers.append(passanger)
+            return True
     
     def __str__(self):
         return f"Vlak: {self.type} {self.train_number} s rychlostí {self.speed}km/s {self.tracks}"
