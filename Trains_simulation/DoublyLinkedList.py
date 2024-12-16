@@ -111,7 +111,7 @@ class LinkedList():
         if(not self.reverse):
             if(next is not None and next.get_data()):
                     self.current = self.current.get_next()
-                    return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":next.get_distance()}
+                    return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":next.get_distance(),"finish":False}
             else:                
                 self.reverse = True
                 return self.movebackward(this_node)
@@ -122,11 +122,12 @@ class LinkedList():
         prev = this_node.get_prev()
         if(prev is not None and prev.get_data()):
             self.current = self.current.get_prev()
-            return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance()}
+            return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance(),"finish":False}
         else:
             self.reverse = False
             self.current = self.tail
-            return self.moveforward()
+            # return self.moveforward()
+            return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance(),"finish":True}
     
     def current_station(self):
         return self.current.get_data()

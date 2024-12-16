@@ -5,6 +5,6 @@
         "maximum-delay": 10,
         "delay-chance":0,
         "min-fill":20,
-        "max-fill":80
+        "max-fill":50
     }
 }

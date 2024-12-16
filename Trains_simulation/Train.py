@@ -57,5 +57,14 @@ class Train():
             self.current_passangers.append(passanger)
             return False
     
+    async def removepassanger(self,station):
+        count =0
+        for i in self.current_passangers[:]:
+            if i == station:
+                self.current_passangers.remove(i)
+                count +=1
+        print("Z vlaku odešlo",count)
+            
+    
     def __str__(self):
         return f"Vlak: {self.type} {self.train_number} s rychlostí {self.speed}km/s {self.tracks}"

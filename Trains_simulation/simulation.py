@@ -22,15 +22,21 @@ async def sendtrain(t):
             print(delay)
             await asyncio.sleep(delay)
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
+        if(road["finish"]):
+            print("konec")
+            break
+        await t.removepassanger(road['to'])
         await asyncio.gather(loadpassangers(t,config))
 
 async def loadpassangers(t,config):
     fill = random.randint(config["min-fill"],config["max-fill"])/100
-    for i in range(round(t.capacity*fill+1)):
+    passangers_bording = round(t.capacity*fill+1)
+    for i in range(passangers_bording):
         result = t.addpassangers(await generatepassanger(t))
         if(result):
             print("Vlak je plný")
             break
+    print("Do vlaku nastoupilo",passangers_bording)
 
 async def generatepassanger(t):
     stations = t.getallstations()
