@@ -52,10 +52,10 @@ class Train():
     
     def addpassangers(self,passanger):
         if(len(self.current_passangers)+1>self.capacity):
-            return False
+            return True
         else:
             self.current_passangers.append(passanger)
-            return True
+            return False
     
     def __str__(self):
         return f"Vlak: {self.type} {self.train_number} s rychlostí {self.speed}km/s {self.tracks}"

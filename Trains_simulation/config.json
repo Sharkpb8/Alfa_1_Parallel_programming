@@ -3,6 +3,8 @@
     "simulation":{
         "mimimum-delay": 1,
         "maximum-delay": 10,
-        "delay-chance":0
+        "delay-chance":0,
+        "min-fill":20,
+        "max-fill":80
     }
 }

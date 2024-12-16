@@ -6,7 +6,7 @@ def openjson():
     with open("./Trains_simulation/config.json","r") as j:
         config = json.load(j)
         simulation = config["simulation"]
-        return {"delay-chance":simulation['delay-chance'],"mimimum-delay":simulation['mimimum-delay'],"maximum-delay":simulation['maximum-delay']}
+        return {"delay-chance":simulation['delay-chance'],"mimimum-delay":simulation['mimimum-delay'],"maximum-delay":simulation['maximum-delay'],"min-fill":simulation['min-fill'],"max-fill":simulation['max-fill']}
          
 
 async def sendtrain(t):
@@ -22,15 +22,23 @@ async def sendtrain(t):
             print(delay)
             await asyncio.sleep(delay)
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
-        await asyncio.gather(loadpassangers(t))
+        await asyncio.gather(loadpassangers(t,config))
 
-async def loadpassangers(t):
+async def loadpassangers(t,config):
+    fill = random.randint(config["min-fill"],config["max-fill"])/100
+    for i in range(round(t.capacity*fill+1)):
+        result = t.addpassangers(await generatepassanger(t))
+        if(result):
+            print("Vlak je plný")
+            break
+
+async def generatepassanger(t):
     stations = t.getallstations()
     followingstations = t.trainposition()
     if(not followingstations["direction"]):
         stations.remove(followingstations["current_station"])
         destination = random.choice(stations)
-        print(destination)
+        return destination
     else:
         # print("stanice aktualni ",followingstations["current_station"])
         index = stations.index(followingstations["current_station"])
@@ -42,8 +50,7 @@ async def loadpassangers(t):
             avaiablestatiosn.append(stations[i])
             # print("pridano",str(stations[i]))
         destination = random.choice(list(avaiablestatiosn))
-        print(destination)
-    t.addpassangers(1)
+        return destination
 
 async def main(trainlist):
     await asyncio.gather(*(sendtrain(t) for t in trainlist))
