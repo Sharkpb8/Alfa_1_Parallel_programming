@@ -22,10 +22,10 @@ async def sendtrain(t):
             print(delay)
             await asyncio.sleep(delay)
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
+        await t.removepassanger(road['to'])
         if(road["finish"]):
             print("konec")
             break
-        await t.removepassanger(road['to'])
         await asyncio.gather(loadpassangers(t,config))
 
 async def loadpassangers(t,config):

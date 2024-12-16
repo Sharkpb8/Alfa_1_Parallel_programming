@@ -122,12 +122,15 @@ class LinkedList():
         prev = this_node.get_prev()
         if(prev is not None and prev.get_data()):
             self.current = self.current.get_prev()
+            if(prev.get_prev() is None):
+                return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance(),"finish":True}
             return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance(),"finish":False}
         else:
             self.reverse = False
             self.current = self.tail
-            # return self.moveforward()
-            return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance(),"finish":True}
+            return self.moveforward()
+            # print("Konec")
+            # return {"from":self.current.get_data(),"to":self.current.get_data(),"distance":this_node.get_distance()}
     
     def current_station(self):
         return self.current.get_data()
