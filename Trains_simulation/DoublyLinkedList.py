@@ -1,8 +1,9 @@
 class  Node():
-    def __init__(self,data,next_node = None,prev_node = None):
+    def __init__(self,data,distance,next_node = None,prev_node = None):
         self.data = data
         self.prev_node = prev_node
         self.next_node = next_node
+        self.distance = distance #distance to this station
         #time add 
         #if station is first set it to 0
         #it will be measured as time to get to that station from the station before
@@ -26,6 +27,12 @@ class  Node():
     
     def set_data(sef,new_data):
         sef.data = new_data
+    
+    def get_distance(self):
+        return self.distance
+    
+    def set_distance(self,new_distance):
+        self.distance = new_distance
         
 class LinkedList():
     def __init__(self,head = None,tail = None):
@@ -38,8 +45,8 @@ class LinkedList():
     def get_size(self):
         return self.size
     
-    def addtail(self,data):
-        new_node = Node(data,self.head)
+    def addtail(self,data,distance):
+        new_node = Node(data,distance,self.head)
         if self.head:
             tail_node = self.tail
             self.tail = new_node
@@ -50,8 +57,8 @@ class LinkedList():
             self.tail = new_node
         self.current = self.tail
         self.size += 1
-    def addhead(self,data):
-        new_node = Node(data,None,self.head)
+    def addhead(self,data,distance):
+        new_node = Node(data,distance,None,self.head)
         if self.tail:
             head_node = self.head
             self.head = new_node

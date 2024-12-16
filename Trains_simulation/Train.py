@@ -3,7 +3,7 @@ from Error import *
 import json
 
 class Train():
-    def __init__(self,type,train_number,tracks):
+    def __init__(self,type,train_number,speed,tracks):
         if(not isinstance(type,str)):
             raise ValueError
         with open("./Trains_simulation/config.json","r") as j:
@@ -17,12 +17,17 @@ class Train():
             raise LenghtError
         if(not isinstance(tracks,LinkedList)):
             raise TypeError
+        if(not isinstance(speed,int)):
+            raise TypeError
+        if(speed<=0):
+            raise SpeedError
         self.type = type
         self.train_number = train_number
+        self.speed = speed
         self.tracks = tracks
     
-    def addstation(self,name):
-        self.tracks.addtail(name)
+    def addstation(self,name,distance):
+        self.tracks.addhead(name,distance)
     
     def removestation(self,name):
         self.tracks.remove(name)
@@ -37,4 +42,4 @@ class Train():
         return self.tracks.moveforward()
     
     def __str__(self):
-        return f"Vlak: {self.type} {self.train_number} {self.tracks}"
+        return f"Vlak: {self.type} {self.train_number} s rychlostí {self.speed}km/s {self.tracks}"
