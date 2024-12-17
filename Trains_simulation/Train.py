@@ -86,14 +86,14 @@ class Train():
             self.current_passangers.append(passanger)
             return False
     
-    async def removepassanger(self,station,config):
+    async def removepassanger(self,station,config,log):
         count =0
         for i in self.current_passangers[:]:
             if i == station:
                 await asyncio.sleep(config["getoff-time"])
                 self.current_passangers.remove(i)
                 count +=1
-        print("Z vlaku odešlo",count)
+        await log(f"Z vlaku vystoupilo {count} cestujících")
             
     
     def __str__(self):
