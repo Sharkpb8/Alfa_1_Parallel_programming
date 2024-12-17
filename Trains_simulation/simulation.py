@@ -25,6 +25,7 @@ async def sendtrain(t):
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
         await t.removepassanger(road['to'],config)
         if(road["finish"]):
+            t.current_fuel = t.fuel
             print("konec")
             break
         needsrefuel = t.needrefill(t.distancetonext())
@@ -47,6 +48,7 @@ async def loadpassangers(t,config):
 
 async def refuel(t,config):
     print("valk tankuje -",t.getcurrentfuel())
+    print("vlak potrebuje",t.fuelneeded())
     await asyncio.sleep(config["fuel-time"])
     new_fuel = round(t.fuelneeded()*(1+random.randint(0,config["max-refuel"]+1)/100))
     t.refuel(new_fuel)

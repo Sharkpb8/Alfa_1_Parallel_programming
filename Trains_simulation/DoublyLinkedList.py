@@ -153,11 +153,14 @@ class LinkedList():
     def nextdistance(self):
         this_node = self.current
         next = this_node.get_next()
-        if(next):
-            return next.get_distance()
+        if(self.reverse):
+            return this_node.get_distance()
         else:
-            prev = this_node.get_prev()
-            return prev.get_distance()
+            if(next):
+                return next.get_distance()
+            else:
+                prev = this_node.get_prev()
+                return prev.get_distance()
             
     
     def __str__(self):

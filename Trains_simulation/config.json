@@ -9,6 +9,6 @@
         "geton-time":0.01,
         "getoff-time":0.02,
         "fuel-time":4,
-        "max-refuel":25
+        "max-refuel":50
     }
 }
