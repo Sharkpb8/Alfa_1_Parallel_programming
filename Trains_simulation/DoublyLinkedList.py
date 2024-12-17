@@ -1,3 +1,5 @@
+from Error import *
+
 class  Node():
     def __init__(self,data,distance,next_node = None,prev_node = None):
         self.data = data
@@ -47,15 +49,17 @@ class LinkedList():
     
     #finish and add to addtail and addheadfo unique stations
     def Find(self,data):
-        this_node = self.head
+        this_node = self.tail
         while this_node:
             if this_node.get_data() == data:
-                return data
+                return True
             else:
                 this_node = this_node.get_next()
-        return None
+        return False
     
     def addtail(self,data,distance):
+        if(self.Find(data)):
+            raise DuplicateStationError
         new_node = Node(data,distance,self.head)
         if self.head:
             tail_node = self.tail
@@ -67,7 +71,10 @@ class LinkedList():
             self.tail = new_node
         self.current = self.tail
         self.size += 1
+
     def addhead(self,data,distance):
+        if(self.Find(data)):
+            raise DuplicateStationError
         new_node = Node(data,distance,None,self.head)
         if self.tail:
             head_node = self.head
@@ -155,21 +162,22 @@ class LinkedList():
             return "ma stanice "+MyString[:-2]
 
     
-# MyList = LinkedList()
-# MyList.addtail(5)
-# MyList.addtail(8)
-# MyList.addtail(12) 
-# MyList.addhead(9)
-# MyList.remove(12)
-# print(MyList.head.get_data())
-# print(MyList.tail.get_data())
-# print(MyList.FindAll())
+MyList = LinkedList()
+MyList.addtail(5,1)
+MyList.addtail(8,1)
+MyList.addtail(12,1) 
+MyList.addhead(9,1)
+MyList.remove(12)
+print(MyList.head.get_data())
+print(MyList.tail.get_data())
+print(MyList.FindAll())
 # print(MyList.current.get_data())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
+# print(MyList.Find(12))
 
 
 

@@ -8,3 +8,5 @@ class SpeedError(Exception):
     pass
 class CapacityError(Exception):
     pass
+class DuplicateStationError(Exception):
+    pass
