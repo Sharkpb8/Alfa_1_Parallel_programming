@@ -167,12 +167,16 @@ def load(trainlist):
             if(len(loadlist) == 0):
                 return print("V souboru trains.json se nic nenachází")
             for i in loadlist:
+                if("typ_vlaku"not in i or "cislo_vlaku" not in i or "rychlost" not in i or "kapacita" not in i):
+                    raise FormatError
+                if("typ_vlaku"not in i or "cislo_vlaku" not in i):
+                    raise FormatError
                 if("typ_vlaku"not in i or "cislo_vlaku" not in i):
                     raise FormatError
                 if("stanice" not in i or not isinstance(i["stanice"], list)):
                     raise FormatError
                 try:
-                    t = Train(i["typ_vlaku"],i["cislo_vlaku"],i["rychlost"],i["kapacita"],LinkedList())
+                    t = Train(i["typ_vlaku"],i["cislo_vlaku"],i["rychlost"],i["kapacita"],i["nadrz"],i["spotreba"],LinkedList())
                 except LenghtError:
                     print("Některý z vlaků má špatný číslo vlaku")
                 except TrainTypeError:
@@ -186,8 +190,11 @@ def load(trainlist):
                 except CapacityError:
                     print("Kapacita vlaku musí být kladné nenulový číslo")
                 trainlist.append(t)
-                for x in i["stanice"]:
-                    t.addstation(x["jmeno"],x["vzdalenost"])
+                try:
+                    for x in i["stanice"]:
+                        t.addstation(x["jmeno"],x["vzdalenost"])
+                except DuplicateStationError:
+                    print("Stanice nesmí mít stejný název")
     except json.JSONDecodeError:
         print("Špatný format souboru trains.json")
     except FormatError:

@@ -4,6 +4,8 @@
     "cislo_vlaku": 1234,
     "rychlost": 80,
     "kapacita": 300,
+    "nadrz": 1700,
+    "spotreba": 5,
     "stanice": [
       {"jmeno": "Praha", "vzdalenost": 0},
       {"jmeno": "Brno", "vzdalenost": 205},

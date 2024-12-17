@@ -14,6 +14,7 @@ async def sendtrain(t):
         road = t.movetrain()
         config = openjson()
         print(f"vlak {t.type} {t.train_number} odjel z - {road['from']}")
+        t.consumefuel(road["distance"])
         traveltime = road["distance"]/t.speed
         await asyncio.sleep(traveltime)
         if(random.randint(1,100)<=config["delay-chance"]):
@@ -26,7 +27,12 @@ async def sendtrain(t):
         if(road["finish"]):
             print("konec")
             break
-        await asyncio.gather(loadpassangers(t,config))
+        needsrefuel = t.needrefill(t.distancetonext())
+        if(not needsrefuel):
+            print("vlak netankuje - ",t.getcurrentfuel())
+            await asyncio.gather(loadpassangers(t,config))
+        else:
+            await asyncio.gather(loadpassangers(t,config),refuel(t,config))
 
 async def loadpassangers(t,config):
     fill = random.randint(config["min-fill"],config["max-fill"])/100
@@ -38,6 +44,13 @@ async def loadpassangers(t,config):
             break
         await asyncio.sleep(config["geton-time"])
     print("Do vlaku nastoupilo",passangers_bording)
+
+async def refuel(t,config):
+    print("valk tankuje -",t.getcurrentfuel())
+    await asyncio.sleep(config["fuel-time"])
+    new_fuel = round(t.fuelneeded()*(1+random.randint(0,config["max-refuel"]+1)/100))
+    t.refuel(new_fuel)
+    print("vlak tet má -",t.getcurrentfuel())
 
 async def generatepassanger(t):
     stations = t.getallstations()
@@ -60,5 +73,7 @@ async def generatepassanger(t):
         return destination
 
 async def main(trainlist):
+    print("Simulace začala")
     await asyncio.gather(*(sendtrain(t) for t in trainlist))
+    print("Simulace skončila")
 

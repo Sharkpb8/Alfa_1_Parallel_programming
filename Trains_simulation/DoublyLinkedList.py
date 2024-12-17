@@ -150,6 +150,16 @@ class LinkedList():
             this_node = this_node.get_next()
         return MyData
     
+    def nextdistance(self):
+        this_node = self.current
+        next = this_node.get_next()
+        if(next):
+            return next.get_distance()
+        else:
+            prev = this_node.get_prev()
+            return prev.get_distance()
+            
+    
     def __str__(self):
         MyString = ""
         this_node = self.tail
@@ -162,15 +172,15 @@ class LinkedList():
             return "ma stanice "+MyString[:-2]
 
     
-MyList = LinkedList()
-MyList.addtail(5,1)
-MyList.addtail(8,1)
-MyList.addtail(12,1) 
-MyList.addhead(9,1)
-MyList.remove(12)
-print(MyList.head.get_data())
-print(MyList.tail.get_data())
-print(MyList.FindAll())
+# MyList = LinkedList()
+# MyList.addtail(5,1)
+# MyList.addtail(8,1)
+# MyList.addtail(12,1) 
+# MyList.addhead(9,1)
+# MyList.remove(12)
+# print(MyList.head.get_data())
+# print(MyList.tail.get_data())
+# print(MyList.FindAll())
 # print(MyList.current.get_data())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
