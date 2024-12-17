@@ -5,6 +5,8 @@
         "maximum-delay": 10,
         "delay-chance":0,
         "min-fill":20,
-        "max-fill":50
+        "max-fill":50,
+        "geton-time":0.01,
+        "getoff-time":0.02
     }
 }

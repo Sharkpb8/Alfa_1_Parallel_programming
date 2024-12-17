@@ -6,7 +6,7 @@ def openjson():
     with open("./Trains_simulation/config.json","r") as j:
         config = json.load(j)
         simulation = config["simulation"]
-        return {"delay-chance":simulation['delay-chance'],"mimimum-delay":simulation['mimimum-delay'],"maximum-delay":simulation['maximum-delay'],"min-fill":simulation['min-fill'],"max-fill":simulation['max-fill']}
+        return simulation
          
 
 async def sendtrain(t):
@@ -22,7 +22,7 @@ async def sendtrain(t):
             print(delay)
             await asyncio.sleep(delay)
         print(f"vlak {t.type} {t.train_number} přijel do - {road['to']}")
-        await t.removepassanger(road['to'])
+        await t.removepassanger(road['to'],config)
         if(road["finish"]):
             print("konec")
             break
@@ -36,6 +36,7 @@ async def loadpassangers(t,config):
         if(result):
             print("Vlak je plný")
             break
+        await asyncio.sleep(config["geton-time"])
     print("Do vlaku nastoupilo",passangers_bording)
 
 async def generatepassanger(t):

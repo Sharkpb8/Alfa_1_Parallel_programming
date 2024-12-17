@@ -1,6 +1,7 @@
 from DoublyLinkedList import *
 from Error import *
 import json
+import asyncio
 
 class Train():
     def __init__(self,type,train_number,speed,capacity,tracks):
@@ -57,10 +58,11 @@ class Train():
             self.current_passangers.append(passanger)
             return False
     
-    async def removepassanger(self,station):
+    async def removepassanger(self,station,config):
         count =0
         for i in self.current_passangers[:]:
             if i == station:
+                await asyncio.sleep(config["getoff-time"])
                 self.current_passangers.remove(i)
                 count +=1
         print("Z vlaku odešlo",count)
