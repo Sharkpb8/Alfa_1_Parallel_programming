@@ -61,6 +61,9 @@ class Train():
     def distancetonext(self):
         return self.tracks.nextdistance()
     
+    def concat(self):
+        return f"{self.type}{self.train_number}"
+    
     def fuelneeded(self):
         return (self.current_fuel-self.distancetonext()*self.consumption)*-1
     
@@ -86,14 +89,14 @@ class Train():
             self.current_passangers.append(passanger)
             return False
     
-    async def removepassanger(self,station,config,log):
+    async def removepassanger(self,station,config,log,t):
         count =0
         for i in self.current_passangers[:]:
             if i == station:
                 await asyncio.sleep(config["getoff-time"])
                 self.current_passangers.remove(i)
                 count +=1
-        await log(f"Z vlaku vystoupilo {count} cestujících")
+        await log(f"Z vlaku vystoupilo {count} cestujících",t)
             
     
     def __str__(self):
