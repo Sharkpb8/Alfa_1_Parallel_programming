@@ -2,11 +2,7 @@ from Train import *
 from simulation import *
 import json
 import asyncio
-
-def openjson():
-    with open('./Trains_simulation/config.json', 'r') as j:
-        config = json.load(j)
-        return config
+import ast
 
 def showoptions(list):
     count =1
@@ -20,40 +16,56 @@ def showotrainptions(trainlist):
         print(f"{count}. {trainlist[count-1].type}{trainlist[count-1].train_number}")
         count +=1
 
+def convert_input(value):
+    try:
+        return ast.literal_eval(value)
+    except (ValueError, SyntaxError):
+        return value
+
 def addtrain():
-    config = openjson()
-    allowedtypes = config["allowedtypes"]
-    optionpicked = False
-    newtrain = {"type":None,"train_number":None}
-    while not optionpicked:
-        print("Vyber si typ")
-        showoptions(allowedtypes)
-        choice = input("Vybírám si: ")
+    newtrain = {"type":None,"train_number":None,"speed":None,"capacity":None,"fuel":None,"consumption":None}
+
+    while True:
+        newtrain["type"] = convert_input(input("Vyber typ valku: "))
+        newtrain["train_number"] = convert_input(input("Vyber číslo vlaku: "))
+        newtrain["speed"] = convert_input(input("Vyber rychlost vlaku (km/s): "))
+        newtrain["capacity"] = convert_input(input("Vyber kapacitu valku: "))
+        newtrain["fuel"] = convert_input(input("Vyber maximálni nádrž vlaku: "))
+        newtrain["consumption"] = convert_input(input("Vyber spotřebu vlaku (L/km): "))
         try:
-            numberchoise = int(choice)
-            newtrain["type"] = allowedtypes[numberchoise-1]
-            break
-        except ValueError:
-            if(choice in allowedtypes):
-                newtrain["type"] = choice
-                break
-        print("Špatná volba")
-    
-    while not optionpicked:
-        print("Vybere 4 místné číslo vlaku")
-        choice = input("Vybírám si: ")
-        try:
-            numberchoise = int(choice)
-            if(numberchoise < 1000 or numberchoise > 9999):
-                raise LenghtError
-            newtrain["train_number"] = numberchoise
-            break
-        except ValueError:
-            print("Zvolte číslo")
-        except LenghtError:
-            print("Číslo musí být 4 ciferne")
-    t = Train(newtrain["type"],newtrain["train_number"],LinkedList())
-    return t
+            t = Train(newtrain["type"],newtrain["train_number"],newtrain["speed"],newtrain["capacity"],newtrain["fuel"],newtrain["consumption"],LinkedList())
+        except TypeTypeError:
+            print("Chyba: Typ vlaku musí být řetězec.")
+        except TrainTypeError:
+            print(f"Chyba: Typ vlaku '{newtrain['type']}' není povolen.")
+        except TrainNumberTypeError:
+            print("Chyba: Číslo vlaku musí být celé číslo.")
+        except TrainNumberLenghtError:
+            print("Chyba: Číslo vlaku musí mít 4 číslice.")
+        except TracksTypeError:
+            print("Chyba: Koleje musí být instance třídy LinkedList.")
+        except SpeedTypeError:
+            print("Chyba: Rychlost musí být celé číslo.")
+        except SpeedError:
+            print("Chyba: Rychlost musí být větší než nula.")
+        except CapacityTypeError:
+            print("Chyba: Kapacita musí být celé číslo.")
+        except CapacityError:
+            print("Chyba: Kapacita musí být větší než nula.")
+        except FuelTypeError:
+            print("Chyba: Palivo musí být celé číslo.")
+        except FuelError:
+            print("Chyba: Palivo musí být větší než nula.")
+        except ConsumptionTypeError:
+            print("Chyba: Spotřeba musí být celé číslo.")
+        except ConsumptionError:
+            print("Chyba: Spotřeba musí být větší než nula.")
+        except json.JSONDecodeError:
+            print("Chyba: Nelze přečíst nebo zpracovat 'config.json'.")
+        except Exception as e:
+            print(f"Neočekávaná chyba: {e}")
+        else:
+            return t
 
 
 def addstation(trainlist):
