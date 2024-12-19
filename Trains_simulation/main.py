@@ -5,24 +5,51 @@ import asyncio
 import ast
 
 def showoptions(list):
+    """
+    Displays the items in a list with numbered options.
+
+    :param list: A list of items to display as options.
+    :type list: list
+    """
     count =1
     for i in list:
         print(f"{count}. {i}")
         count +=1
 
 def showotrainptions(trainlist):
+    """
+    Displays the train options with their type and train number.
+
+    :param trainlist: A list of Train objects to display as options.
+    :type trainlist: list
+    """
     count =1
     for i in trainlist:
         print(f"{count}. {trainlist[count-1].type}{trainlist[count-1].train_number}")
         count +=1
 
 def convert_input(value):
+    """
+    Tries to convert a string input into a Python literal (e.g., int, float, list, etc.).
+    If conversion fails, returns the original string.
+
+    :param value: The input string to be evaluated.
+    :type value: str
+    :return: The converted value or the original string if conversion fails.
+    :rtype: any
+    """
     try:
         return ast.literal_eval(value)
     except (ValueError, SyntaxError):
         return value
 
 def addtrain():
+    """
+    Creates new train based on user input
+
+    :returns: new train
+    :rtype: train
+    """
     newtrain = {"type":None,"train_number":None,"speed":None,"capacity":None,"fuel":None,"consumption":None}
     while True:
         newtrain["type"] = convert_input(input("Vyber typ valku: "))
@@ -68,6 +95,11 @@ def addtrain():
 
 
 def addstation(trainlist):
+    """
+    creates new station for specific train
+
+    :param trainlist: list of trains from where to select  
+    """
     newstation = {"Name":None,"Distance":None}
     running = True
     runningstation = True
@@ -145,6 +177,10 @@ def addstation(trainlist):
             print("Neplatný výběr vlaku")
 
 def deletetrain(trainlist):
+    """
+    Deletes train by choice
+    :param trainlist: train list from where to delete train  
+    """
     optionpicked = False
     while not optionpicked:
         print("Který vlak chcete smazat?")
@@ -171,6 +207,11 @@ def deletetrain(trainlist):
         print("Špatná volba")
     
 def removestation(trainlist):
+    """
+    Removes station from train
+
+    :param trainlist: trainlist from where to delete train  
+    """
     optionpicked = False
     while not optionpicked:
         print("Pro který vlak chce smazat stanici ?")
@@ -219,6 +260,10 @@ def removestation(trainlist):
             print("Špatná volba")
 
 def load(trainlist):
+    """
+    load trains and stations from json
+    :param trainlist: trainlist where to insert trains  
+    """
     try:
         with open("./Trains_simulation/trains.json","r",encoding="utf-8") as j:
             loadlist = json.load(j)
@@ -285,41 +330,54 @@ def load(trainlist):
         print("Format vlaku je špatný")
         
     
+def Run():
+    """
+    Main program loop
+    :param 1: Add train to list
+    :param 2: Deletes train from lsit
+    :param 3: Adds station to train
+    :param 4: Deletes station from train
+    :param 5: Prints out all current trains
+    :param 6: Starts simulation
+    :param 7: Loads trains and station from json
+    :param 8: ends program
+    """
+    running = True
+    trainlist = []
+    while running:
+        options = ["Pridat vlak","Smazat vlak","Přidat zastavku vlaku","Smazat zastavku vlaku","Výpis vlaku","Spustit simulaci","Načíst ze souboru","Ukončit"]
+        showoptions(options)
+        choice = input("Vybírám si: ")
+        match choice:
+            case "Pridat vlak" | "1":
+                t = addtrain()
+                trainlist.append(t)
+            case "Smazat vlak" | "2":
+                deletetrain(trainlist)
+            case "Přidat zastavku vlaku" | "3":
+                if(len(trainlist) == 0):
+                    print("Žádny vlaky nebyly vytvořeny")
+                else:
+                    station = addstation(trainlist)
+            case "Smazat zastavku vlaku" | "4":
+                removestation(trainlist)
+            case "Vypis vlaku" | "5":
+                if(len(trainlist) == 0):
+                    print("Žádny vlaky nebyly vytvořeny")
+                else:
+                    for i in trainlist:
+                        print(i)
+            case "Spustit simulaci" | "6":
+                if(len(trainlist) == 0):
+                    print("Žádny vlaky nebyly vytvořeny")
+                else:
+                    asyncio.run(main(trainlist))
+            case "Načíst ze souboru" | "7":
+                load(trainlist)
+            case "Ukončit" | "8":
+                running = False
+            case _:
+                print("Špatná volba")
+        print("")
 
-running = True
-trainlist = []
-while running:
-    options = ["Pridat vlak","Smazat vlak","Přidat zastavku vlaku","Smazat zastavku vlaku","Výpis vlaku","Spustit simulaci","Načíst ze souboru","Ukončit"]
-    showoptions(options)
-    choice = input("Vybírám si: ")
-    match choice:
-        case "Pridat vlak" | "1":
-            t = addtrain()
-            trainlist.append(t)
-        case "Smazat vlak" | "2":
-            deletetrain(trainlist)
-        case "Přidat zastavku vlaku" | "3":
-            if(len(trainlist) == 0):
-                print("Žádny vlaky nebyly vytvořeny")
-            else:
-                station = addstation(trainlist)
-        case "Smazat zastavku vlaku" | "4":
-            removestation(trainlist)
-        case "Vypis vlaku" | "5":
-            if(len(trainlist) == 0):
-                print("Žádny vlaky nebyly vytvořeny")
-            else:
-                for i in trainlist:
-                    print(i)
-        case "Spustit simulaci" | "6":
-            if(len(trainlist) == 0):
-                print("Žádny vlaky nebyly vytvořeny")
-            else:
-                asyncio.run(main(trainlist))
-        case "Načíst ze souboru" | "7":
-            load(trainlist)
-        case "Ukončit" | "8":
-            running = False
-        case _:
-            print("Špatná volba")
-    print("")
+Run()
