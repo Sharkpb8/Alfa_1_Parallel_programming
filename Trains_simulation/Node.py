@@ -50,7 +50,7 @@ class Node():
         Retrieves the next node.
 
         :return: The next node or None if there is no next node.
-        :type: Node or None
+        :rtype: Node or None
         """
         return self.next_node
     
@@ -72,7 +72,7 @@ class Node():
         Retrieves the previous node.
 
         :return: The previous node or None if there is no previous node.
-        :type: Node or None
+        :rtype: Node or None
         """
         return self.prev_node
     
@@ -94,7 +94,7 @@ class Node():
         Retrieves the data stored in the node.
 
         :return: The string data of the node.
-        :type: str
+        :rtype: str
         """
         return self.data
     
@@ -119,7 +119,7 @@ class Node():
         Retrieves the distance value.
 
         :return: The distance value of the node.
-        :type: int
+        :rtype: int
         """
         return self.distance
     
