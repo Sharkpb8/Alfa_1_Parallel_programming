@@ -1,40 +1,4 @@
-from Error import *
-
-class  Node():
-    def __init__(self,data,distance,next_node = None,prev_node = None):
-        self.data = data
-        self.prev_node = prev_node
-        self.next_node = next_node
-        self.distance = distance #distance to this station
-        #time add 
-        #if station is first set it to 0
-        #it will be measured as time to get to that station from the station before
-        #input will be dictionary from json 
-        #UI input will be handled later
-
-    def get_next(self):
-        return self.next_node
-    
-    def set_next(sef,new_next_node):
-        sef.next_node = new_next_node
-
-    def get_prev(self):
-        return self.prev_node
-    
-    def set_prev(sef,new_prev):
-        sef.prev_node = new_prev 
-
-    def get_data(self):
-        return self.data
-    
-    def set_data(sef,new_data):
-        sef.data = new_data
-    
-    def get_distance(self):
-        return self.distance
-    
-    def set_distance(self,new_distance):
-        self.distance = new_distance
+from Node import *
         
 class LinkedList():
     def __init__(self,head = None,tail = None):
