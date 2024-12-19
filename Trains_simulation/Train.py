@@ -13,7 +13,7 @@ class Train():
             raise TrainTypeError
         if(not isinstance(train_number,int)):
             raise TrainNumberTypeError
-        if(train_number < 1000 and train_number > 9999):
+        if(train_number < 1000 or train_number > 9999):
             raise TrainNumberLenghtError
         if(not isinstance(tracks,LinkedList)):
             raise TracksTypeError
@@ -43,10 +43,14 @@ class Train():
         self.consumption = consumption
         self.tracks = tracks
     
-    def addstation(self,name,distance):
+    def addstation(self,name = None,distance = None):
+        if(name is None or distance is None):
+            raise EmptyInputError
         self.tracks.addhead(name,distance)
     
-    def removestation(self,name):
+    def removestation(self,name = None):
+        if(name is None):
+            raise EmptyInputError
         self.tracks.remove(name)
     
     def getallstations(self):
@@ -70,7 +74,11 @@ class Train():
     def fuelneeded(self):
         return (self.current_fuel-self.distancetonext()*self.consumption)*-1
     
-    def needrefill(self,travel):
+    def needrefill(self,travel = None):
+        if(travel is None):
+            raise EmptyInputError
+        if(isinstance(travel,bool)):
+            raise TravelTypeError
         if(not isinstance(travel,int)):
             raise TravelTypeError
         if(self.current_fuel-self.consumption*travel>0):
@@ -78,7 +86,11 @@ class Train():
         else:
             return True
     
-    def refuel(self,newfuel):
+    def refuel(self,newfuel = None):
+        if(newfuel is None):
+            raise EmptyInputError
+        if(isinstance(newfuel,bool)):
+            raise FuelTypeError
         if(not isinstance(newfuel,int)):
             raise FuelTypeError
         self.current_fuel += newfuel

@@ -2,12 +2,6 @@ class LenghtError(Exception):
     pass
 class FormatError(Exception):
     pass
-class SpeedError(Exception):
-    pass
-class CapacityError(Exception):
-    pass
-class DuplicateStationError(Exception):
-    pass
 
 class DataTypeError(Exception):
     pass
@@ -27,6 +21,8 @@ class HeadError(Exception):
 class TailError(Exception):
     pass
 class NodeError(Exception):
+    pass
+class DuplicateStationError(Exception):
     pass
 
 class TypeTypeError(Exception):
@@ -60,4 +56,6 @@ class TravelTypeError(Exception):
 class PassangerTypeError(Exception):
     pass
 class TrainTypeError(Exception):
+    pass
+class EmptyInputError(Exception):
     pass

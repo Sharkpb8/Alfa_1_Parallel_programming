@@ -138,33 +138,237 @@ class TestLinkedList(unittest.TestCase):
         self.assertIsInstance(MyList.head, Node)
         self.assertIsInstance(MyList.tail, Node)
 
-
 class TestTrain(unittest.TestCase):
-    def setUp(self):
-        self.tracks = LinkedList()
-        self.tracks.addtail("StationA", 10)
-        self.tracks.addtail("StationB", 20)
+    def test_initialization(self): 
+        self.train = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+
+    def test_invalid_train_type(self):
+        with self.assertRaises(TypeTypeError):
+            Train(50, 1234, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TypeTypeError):
+            Train(False, 1234, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TypeTypeError):
+            Train([], 1234, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TypeTypeError):
+            Train(5.5, 1234, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TypeTypeError):
+            Train(None, 1234, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainTypeError):
+            Train("Ahoj", 1234, 100, 50, 200, 10, LinkedList())
+    
+    def test_invalid_train_train_number(self):
+        with self.assertRaises(TrainNumberTypeError):
+            Train("R", "1234", 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberTypeError):
+            Train("R", [], 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberTypeError):
+            Train("R", 5.5, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberTypeError):
+            Train("R", None, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", 40, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", -1, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", 808080, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", False, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", True, 100, 50, 200, 10, LinkedList())
+        with self.assertRaises(TrainNumberLenghtError):
+            Train("R", -5000, 100, 50, 200, 10, LinkedList())
+
+    def test_invalid_train_speed(self):
+        with self.assertRaises(SpeedTypeError):
+            Train("R", 1234, "100", 50, 200, 10, LinkedList())
+        with self.assertRaises(SpeedTypeError):
+            Train("R", 1234, [], 50, 200, 10, LinkedList())
+        with self.assertRaises(SpeedTypeError):
+            Train("R", 1234, 5.5, 50, 200, 10, LinkedList())
+        with self.assertRaises(SpeedTypeError):
+            Train("R", 1234, None, 50, 200, 10, LinkedList())
+        with self.assertRaises(SpeedError):
+            Train("R", 1234, False, 50, 200, 10, LinkedList())
+        with self.assertRaises(SpeedError):
+            Train("R", 1234, -50, 50, 200, 10, LinkedList())
         
-        self.train = Train("R", 1234, 100, 50, 200, 10, self.tracks)
+    def test_invalid_train_capacity(self):
+        with self.assertRaises(CapacityTypeError):
+            Train("R", 1234, 100, "50", 200, 10, LinkedList())
+        with self.assertRaises(CapacityTypeError):
+            Train("R", 1234, 100, [], 200, 10, LinkedList())
+        with self.assertRaises(CapacityTypeError):
+            Train("R", 1234, 100, 5.5, 200, 10, LinkedList())
+        with self.assertRaises(CapacityTypeError):
+            Train("R", 1234, 100, None, 200, 10, LinkedList())
+        with self.assertRaises(CapacityError):
+            Train("R", 1234, 100, False, 200, 10, LinkedList())
+        with self.assertRaises(CapacityError):
+            Train("R", 1234, 100, -50, 200, 10, LinkedList())
+    
+    def test_invalid_train_fuel(self):
+        with self.assertRaises(FuelTypeError):
+            Train("R", 1234, 100, 50, "200", 10, LinkedList())
+        with self.assertRaises(FuelTypeError):
+            Train("R", 1234, 100, 50, [], 10, LinkedList())
+        with self.assertRaises(FuelTypeError):
+            Train("R", 1234, 100, 50, 5.5, 10, LinkedList())
+        with self.assertRaises(FuelTypeError):
+            Train("R", 1234, 100, 50, None, 10, LinkedList())
+        with self.assertRaises(FuelError):
+            Train("R", 1234, 100, 50, False, 10, LinkedList())
+        with self.assertRaises(FuelError):
+            Train("R", 1234, 100, 50, -5000, 10, LinkedList())  
 
-    def test_valid_initialization(self):
-        self.assertEqual(self.train.type, "R")
-        self.assertEqual(self.train.speed, 100)
+    def test_invalid_train_consumption(self):
+        with self.assertRaises(ConsumptionTypeError):
+            Train("R", 1234, 100, 50, 200, "10", LinkedList())
+        with self.assertRaises(ConsumptionTypeError):
+            Train("R", 1234, 100, 50, 200, [], LinkedList())
+        with self.assertRaises(ConsumptionTypeError):
+            Train("R", 1234, 100, 50, 200, 5.5, LinkedList())
+        with self.assertRaises(ConsumptionTypeError):
+            Train("R", 1234, 100, 50, 200, None, LinkedList())
+        with self.assertRaises(ConsumptionError):
+            Train("R", 1234, 100, 50, 200, False, LinkedList())
+        with self.assertRaises(ConsumptionError):
+            Train("R", 1234, 100, 50, 200, -10, LinkedList())
+
+    def test_invalid_train_consumption(self):
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, "LinkedList()")
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, [])
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, 5.5)
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, None)
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, False)
+        with self.assertRaises(TracksTypeError):
+            Train("R", 1234, 100, 50, 200, 10, -5)
+    
+    def test_valid_train(self):
+        Train("R", 1234, 100, 50, 200, 10, LinkedList())
+    
+    def test_valid_data(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        self.assertEqual(t.type,"R")
+        self.assertEqual(t.train_number,1234)
+        self.assertEqual(t.speed,100)
+        self.assertEqual(t.capacity,50)
+        self.assertEqual(t.current_passangers,[])
+        self.assertEqual(t.fuel,200)
+        self.assertEqual(t.current_fuel,200)
+        self.assertEqual(t.consumption,10)
+        self.assertIsInstance(t.tracks,LinkedList)
+    
+    def test_addstation(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        self.assertEqual(t.getallstations(),["StationA"])
+        with self.assertRaises(EmptyInputError):
+            t.addstation(None,50)
+        with self.assertRaises(EmptyInputError):
+            t.addstation("StationA")
+        with self.assertRaises(EmptyInputError):
+            t.addstation(None,None)
+    
+    def test_removestation(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 0)
+        self.assertEqual(t.getallstations(),["StationA","StationB"])
+        t.removestation("StationB")
+        self.assertEqual(t.getallstations(),["StationA"])
+        with self.assertRaises(EmptyInputError):
+            t.removestation()
+    
+    def test_size(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 0)
+        self.assertEqual(t.gettrackssize(),2)
+    
+    def test_fuel(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        self.assertEqual(t.getcurrentfuel(),200)
+    
+    def test_moveforward(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        self.assertEqual(t.movetrain(),{"from":"StationA","to":"StationB","distance":20,"finish":False})
+        self.assertEqual(t.movetrain(),{"from":"StationB","to":"StationA","distance":20,"finish":True})
+    
+    def test_distance(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        self.assertEqual(t.distancetonext(),20)
+    
+    def test_concat(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        self.assertEqual(t.concat(),"R1234")
+    
+    def test_fuelneeded(self):
+        t = Train("R", 1234, 100, 50, 200, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        t.current_fuel = 0
+        self.assertEqual(t.fuelneeded(),200)
+
+    def test_needrefill(self):
+        t = Train("R", 1234, 100, 50, 300, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        t.current_fuel = 0
+        self.assertTrue(t.needrefill(20))
+        t.current_fuel = 300
+        self.assertFalse(t.needrefill(20))
+        with self.assertRaises(EmptyInputError):
+            t.needrefill()
+        with self.assertRaises(TravelTypeError):
+            t.needrefill("")
+        with self.assertRaises(TravelTypeError):
+            t.needrefill(5.5)
+        with self.assertRaises(TravelTypeError):
+            t.needrefill(False)
+        with self.assertRaises(TravelTypeError):
+            t.needrefill([])
+    
+    def test_refull(self):
+        t = Train("R", 1234, 100, 50, 300, 10, LinkedList())
+        t.current_fuel = 0
+        self.assertEqual(t.current_fuel,0)
+        t.refuel(20)
+        self.assertEqual(t.current_fuel,20)
+        with self.assertRaises(EmptyInputError):
+            t.refuel()
+        with self.assertRaises(FuelTypeError):
+            t.refuel("")
+        with self.assertRaises(FuelTypeError):
+            t.refuel(5.5)
+        with self.assertRaises(FuelTypeError):
+            t.refuel(False)
+        with self.assertRaises(FuelTypeError):
+            t.refuel([])
+
         
-    def test_add_station(self):
-        self.train.addstation("StationC", 30)
-        self.assertTrue(self.tracks.Find("StationC"))
+    # def test_add_station(self):
+    #     self.train.addstation("StationC", 30)
+    #     self.assertTrue(MyList.Find("StationC"))
 
-    def test_fuel_consumption(self):
-        self.train.consumefuel(10)
-        self.assertEqual(self.train.getcurrentfuel(), 100)
+    # def test_fuel_consumption(self):
+    #     self.train.consumefuel(10)
+    #     self.assertEqual(self.train.getcurrentfuel(), 100)
 
-    def test_need_refill(self):
-        self.assertFalse(self.train.needrefill(10))
-        self.assertTrue(self.train.needrefill(30))
+    # def test_need_refill(self):
+    #     self.assertFalse(self.train.needrefill(10))
+    #     self.assertTrue(self.train.needrefill(30))
 
-    def test_add_and_remove_passengers(self):
-        self.assertFalse(self.train.addpassangers("StationB"))
+    # def test_add_and_remove_passengers(self):
+    #     self.assertFalse(self.train.addpassangers("StationB"))
 
 if __name__ == "__main__":
     unittest.main()
