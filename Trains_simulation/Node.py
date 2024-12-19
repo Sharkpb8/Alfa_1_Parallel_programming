@@ -9,6 +9,8 @@ class Node():
 
         if (not isinstance(distance, int)):
             raise DistanceTypeError
+        if (distance < 0):
+            raise DistanceLenghtError
 
         if (next_node is not None and not isinstance(next_node, Node)):
             raise NextNodeError

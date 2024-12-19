@@ -15,6 +15,8 @@ class DataLenghtError(Exception):
     pass
 class DistanceTypeError(Exception):
     pass
+class DistanceLenghtError(Exception):
+    pass
 class NextNodeError(Exception):
     pass
 class PrevNodeError(Exception):

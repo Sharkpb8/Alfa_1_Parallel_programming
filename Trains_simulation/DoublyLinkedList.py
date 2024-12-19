@@ -88,11 +88,11 @@ class LinkedList():
                     return {"from":this_node.get_data(),"to":self.current.get_data(),"distance":next.get_distance(),"finish":False}
             else:                
                 self.reverse = True
-                return self.movebackward(this_node)
+                return self.__movebackward(this_node)
         else:
-            return self.movebackward(this_node)
+            return self.__movebackward(this_node)
     
-    def movebackward(self,this_node):
+    def __movebackward(self,this_node):
         if(this_node is not None and not isinstance(this_node, Node)):
             raise NodeError
         prev = this_node.get_prev()
