@@ -59,3 +59,5 @@ class TrainTypeError(Exception):
     pass
 class EmptyInputError(Exception):
     pass
+class LowFuelError(Exception):
+    pass

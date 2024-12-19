@@ -95,15 +95,26 @@ class Train():
             raise FuelTypeError
         self.current_fuel += newfuel
 
-    def consumefuel(self,distance):
+    def consumefuel(self,distance = None):
+        if(distance is None):
+            raise EmptyInputError
+        if(isinstance(distance,bool)):
+            raise DistanceTypeError
         if(not isinstance(distance,int)):
             raise DistanceTypeError
-        self.current_fuel -= distance*self.consumption
+        if(self.current_fuel - distance*self.consumption<0):
+            raise LowFuelError
+        else:
+            self.current_fuel -= distance*self.consumption
     
     def trainposition(self):
         return {"current_station":self.tracks.current_station(),"direction":self.tracks.reverse}
     
-    def addpassangers(self,passanger):
+    def addpassangers(self,passanger = None):
+        if(passanger is None):
+            raise EmptyInputError
+        if(isinstance(passanger,bool)):
+            raise PassangerTypeError
         if(not isinstance(passanger,str)):
             raise PassangerTypeError
         if(len(self.current_passangers)+1>self.capacity):
@@ -113,6 +124,10 @@ class Train():
             return False
     
     async def removepassanger(self,station,config,log,t):
+        if(station is None):
+            raise EmptyInputError
+        if(isinstance(station,bool)):
+            raise PassangerTypeError
         if(not isinstance(station,str)):
             raise DataTypeError
         if(not isinstance(t,Train)):

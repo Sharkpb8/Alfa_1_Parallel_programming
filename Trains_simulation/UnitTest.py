@@ -16,6 +16,12 @@ class TestNode(unittest.TestCase):
             Node("StationA", "10")
         with self.assertRaises(DistanceLenghtError):
             Node("StationA", -1)
+        with self.assertRaises(EmptyInputError):
+            Node(None,5)
+        with self.assertRaises(EmptyInputError):
+            Node("StationA")
+        with self.assertRaises(EmptyInputError):
+            Node(None,None)
 
     def test_getters_and_setters(self):
         n = Node("StationA", 10)
@@ -353,6 +359,55 @@ class TestTrain(unittest.TestCase):
             t.refuel(False)
         with self.assertRaises(FuelTypeError):
             t.refuel([])
+    
+    def test_consumefuel(self):
+        t = Train("R", 1234, 100, 50, 300, 10, LinkedList())
+        self.assertEqual(t.current_fuel,300)
+        t.consumefuel(10)
+        self.assertEqual(t.current_fuel,200)
+        with self.assertRaises(LowFuelError):
+            t.consumefuel(1000)
+        with self.assertRaises(EmptyInputError):
+            t.consumefuel()
+        with self.assertRaises(DistanceTypeError):
+            t.consumefuel("")
+        with self.assertRaises(DistanceTypeError):
+            t.consumefuel(5.5)
+        with self.assertRaises(DistanceTypeError):
+            t.consumefuel(False)
+        with self.assertRaises(DistanceTypeError):
+            t.consumefuel([])
+    
+    def test_trainposition(self):
+        t = Train("R", 1234, 100, 50, 300, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        t.addstation("StationC", 30)
+        self.assertEqual(t.trainposition(),{"current_station":"StationA","direction":False})
+        t.movetrain()
+        self.assertEqual(t.trainposition(),{"current_station":"StationB","direction":False})
+        t.movetrain()
+        t.movetrain()
+        self.assertEqual(t.trainposition(),{"current_station":"StationB","direction":True})
+    
+    def test_addpassangers(self):
+        t = Train("R", 1234, 100, 50, 300, 10, LinkedList())
+        t.addstation("StationA", 0)
+        t.addstation("StationB", 20)
+        self.assertFalse(t.addpassangers("ahoj"))
+        self.assertEqual(t.current_passangers,["ahoj"])
+        t.capacity = 1
+        self.assertTrue(t.addpassangers("ahoj"))
+        with self.assertRaises(EmptyInputError):
+            t.addpassangers()
+        with self.assertRaises(PassangerTypeError):
+            t.addpassangers(5)
+        with self.assertRaises(PassangerTypeError):
+            t.addpassangers(5.5)
+        with self.assertRaises(PassangerTypeError):
+            t.addpassangers(False)
+        with self.assertRaises(PassangerTypeError):
+            t.addpassangers([])
 
         
     # def test_add_station(self):

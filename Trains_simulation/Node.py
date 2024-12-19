@@ -1,7 +1,9 @@
 from Error import *
 
 class Node():
-    def __init__(self, data, distance, next_node=None, prev_node=None):
+    def __init__(self, data = None, distance = None, next_node=None, prev_node=None):
+        if(data is None or distance is None):
+            raise EmptyInputError
         if (not isinstance(data, str)):
             raise DataTypeError
         if (len(data) < 3):
