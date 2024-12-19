@@ -2,6 +2,10 @@ from Node import *
         
 class LinkedList():
     def __init__(self,head = None,tail = None):
+        if (head is not None and not isinstance(head, Node)):
+            raise HeadError
+        if (tail is not None and not isinstance(tail, Node)):
+            raise TailError
         self.head = head
         self.tail = tail
         self.current = tail
@@ -11,7 +15,6 @@ class LinkedList():
     def get_size(self):
         return self.size
     
-    #finish and add to addtail and addheadfo unique stations
     def Find(self,data):
         this_node = self.tail
         while this_node:
@@ -90,6 +93,8 @@ class LinkedList():
             return self.movebackward(this_node)
     
     def movebackward(self,this_node):
+        if(this_node is not None and not isinstance(this_node, Node)):
+            raise NodeError
         prev = this_node.get_prev()
         if(prev is not None and prev.get_data()):
             self.current = self.current.get_prev()
@@ -140,11 +145,11 @@ class LinkedList():
 
     
 # MyList = LinkedList()
-# MyList.addtail(5,1)
-# MyList.addtail(8,1)
-# MyList.addtail(12,1) 
-# MyList.addhead(9,1)
-# MyList.remove(12)
+# MyList.addtail("555",1)
+# MyList.addtail("888",1)
+# MyList.addtail("121212",1) 
+# MyList.addhead("999",1)
+# MyList.remove("121212")
 # print(MyList.head.get_data())
 # print(MyList.tail.get_data())
 # print(MyList.FindAll())
@@ -154,7 +159,7 @@ class LinkedList():
 # print(MyList.moveforward())
 # print(MyList.moveforward())
 # print(MyList.moveforward())
-# print(MyList.Find(12))
+# print(MyList.Find("121212"))
 
 
 
