@@ -50,18 +50,22 @@ class TestLinkedList(unittest.TestCase):
         MyList = LinkedList()
         MyList.addtail("StationA", 10)
         MyList.addtail("StationB", 20)
+        self.assertEqual(MyList.size, 2)
         self.assertEqual(MyList.get_size(), 2)
         
         MyList.remove("StationA")
+        self.assertEqual(MyList.size, 1)
         self.assertEqual(MyList.get_size(), 1)
 
     def test_add_and_remove_head(self):
         MyList = LinkedList()
         MyList.addhead("StationA", 10)
         MyList.addhead("StationB", 20)
+        self.assertEqual(MyList.size, 2)
         self.assertEqual(MyList.get_size(), 2)
 
         MyList.remove("StationB")
+        self.assertEqual(MyList.size, 1)
         self.assertEqual(MyList.get_size(), 1)
 
     def test_navigation(self):
@@ -125,6 +129,15 @@ class TestLinkedList(unittest.TestCase):
         MyList = LinkedList()
         with self.assertRaises(AttributeError):
             MyList.__movebackward()
+
+    def test_isinstance(self):
+        MyList = LinkedList()
+        self.assertEqual(MyList.head, None)
+        self.assertEqual(MyList.tail, None)
+        MyList.addhead("StationA", 10)
+        self.assertIsInstance(MyList.head, Node)
+        self.assertIsInstance(MyList.tail, Node)
+
 
 class TestTrain(unittest.TestCase):
     def setUp(self):
