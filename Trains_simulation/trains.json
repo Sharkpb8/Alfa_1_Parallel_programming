@@ -47,7 +47,7 @@
     "rychlost": 70,
     "kapacita": 200,
     "nadrz": 2700,
-    "spotreba": 3.5,
+    "spotreba": 3,
     "stanice": [
       {"jmeno": "Karlovy Vary", "vzdalenost": 0},
       {"jmeno": "Cheb", "vzdalenost": 46},
@@ -61,7 +61,7 @@
     "rychlost": 90,
     "kapacita": 250,
     "nadrz": 3500,
-    "spotreba": 4.5,
+    "spotreba": 4,
     "stanice": [
       {"jmeno": "Kladno", "vzdalenost": 0},
       {"jmeno": "Mladá Boleslav", "vzdalenost": 42},
@@ -89,7 +89,7 @@
     "rychlost": 50,
     "kapacita": 120,
     "nadrz": 2000,
-    "spotreba": 2.5,
+    "spotreba": 2,
     "stanice": [
       {"jmeno": "Třebíč", "vzdalenost": 0},
       {"jmeno": "Žďár nad Sázavou", "vzdalenost": 39},
@@ -131,7 +131,7 @@
     "rychlost": 110,
     "kapacita": 230,
     "nadrz": 3400,
-    "spotreba": 3.8,
+    "spotreba": 3,
     "stanice": [
       {"jmeno": "Tábor", "vzdalenost": 0},
       {"jmeno": "Písek", "vzdalenost": 34},

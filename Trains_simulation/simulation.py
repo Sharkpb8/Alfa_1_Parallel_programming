@@ -81,5 +81,5 @@ async def generatepassanger(t):
 async def main(trainlist):
     print("Simulace začala")
     await asyncio.gather(*(sendtrain(t) for t in trainlist))
-    print("Simulace začala")
+    print("Simulace skončila")
 

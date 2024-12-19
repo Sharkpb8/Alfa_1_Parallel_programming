@@ -5,30 +5,34 @@ import asyncio
 class Train():
     def __init__(self,type,train_number,speed,capacity,fuel,consumption,tracks):
         if(not isinstance(type,str)):
-            raise ValueError
+            raise TypeTypeError
         with open("./Trains_simulation/config.json","r") as j:
             config = json.load(j)
             allowedtypes = config["allowedtypes"]
         if(type not in allowedtypes):
             raise TrainTypeError
         if(not isinstance(train_number,int)):
-            raise TypeError
+            raise TrainNumberTypeError
         if(train_number < 1000 and train_number > 9999):
-            raise LenghtError
+            raise TrainNumberLenghtError
         if(not isinstance(tracks,LinkedList)):
-            raise TypeError
+            raise TracksTypeError
         if(not isinstance(speed,int)):
-            raise TypeError
+            raise SpeedTypeError
         if(speed<=0):
             raise SpeedError
         if(not isinstance(capacity,int)):
-            raise TypeError
+            raise CapacityTypeError
         if(capacity<=0):
             raise CapacityError
+        if(not isinstance(fuel,int)):
+            raise FuelTypeError
         if(fuel<=0):
-            raise ValueError
+            raise FuelError
+        if(not isinstance(consumption,int)):
+            raise ConsumptionTypeError
         if(consumption<=0):
-            raise ValueError
+            raise ConsumptionError
         self.type = type
         self.train_number = train_number
         self.speed = speed
@@ -67,21 +71,29 @@ class Train():
         return (self.current_fuel-self.distancetonext()*self.consumption)*-1
     
     def needrefill(self,travel):
+        if(not isinstance(travel,int)):
+            raise TravelTypeError
         if(self.current_fuel-self.consumption*travel>0):
             return False
         else:
             return True
     
     def refuel(self,newfuel):
+        if(not isinstance(newfuel,int)):
+            raise FuelTypeError
         self.current_fuel += newfuel
 
     def consumefuel(self,distance):
+        if(not isinstance(distance,int)):
+            raise DistanceTypeError
         self.current_fuel -= distance*self.consumption
     
     def trainposition(self):
         return {"current_station":self.tracks.current_station(),"direction":self.tracks.reverse}
     
     def addpassangers(self,passanger):
+        if(not isinstance(passanger,str)):
+            raise PassangerTypeError
         if(len(self.current_passangers)+1>self.capacity):
             return True
         else:
@@ -89,6 +101,10 @@ class Train():
             return False
     
     async def removepassanger(self,station,config,log,t):
+        if(not isinstance(station,str)):
+            raise DataTypeError
+        if(not isinstance(t,Train)):
+            raise TrainTypeError
         count =0
         for i in self.current_passangers[:]:
             if i == station:

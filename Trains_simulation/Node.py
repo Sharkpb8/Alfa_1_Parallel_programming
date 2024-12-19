@@ -3,7 +3,7 @@ from Error import *
 class Node():
     def __init__(self, data, distance, next_node=None, prev_node=None):
         if (not isinstance(data, str)):
-            raise DataError
+            raise DataTypeError
         if (len(data) < 3):
             raise DataLenghtError
 
@@ -42,7 +42,7 @@ class Node():
     
     def set_data(self, new_data):
         if (not isinstance(new_data, str)):
-            raise DataError
+            raise DataTypeError
         if (len(new_data) < 3):
             raise DataLenghtError
         self.data = new_data
