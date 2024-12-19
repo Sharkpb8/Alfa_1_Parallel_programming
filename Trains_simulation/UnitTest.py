@@ -409,21 +409,6 @@ class TestTrain(unittest.TestCase):
         with self.assertRaises(PassangerTypeError):
             t.addpassangers([])
 
-        
-    # def test_add_station(self):
-    #     self.train.addstation("StationC", 30)
-    #     self.assertTrue(MyList.Find("StationC"))
-
-    # def test_fuel_consumption(self):
-    #     self.train.consumefuel(10)
-    #     self.assertEqual(self.train.getcurrentfuel(), 100)
-
-    # def test_need_refill(self):
-    #     self.assertFalse(self.train.needrefill(10))
-    #     self.assertTrue(self.train.needrefill(30))
-
-    # def test_add_and_remove_passengers(self):
-    #     self.assertFalse(self.train.addpassangers("StationB"))
 
 if __name__ == "__main__":
     unittest.main()
