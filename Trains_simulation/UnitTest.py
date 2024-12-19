@@ -27,14 +27,14 @@ class TestNode(unittest.TestCase):
         n = Node("StationA", 10)
         self.assertEqual(n.get_data(), "StationA")
         n.set_data("StationB")
-        self.assertEqual(n.get_data(), "StationB")
-        
+        self.assertEqual(n.get_data(), "StationB") 
         with self.assertRaises(DataLenghtError):
             n.set_data("A")
-        
         self.assertEqual(n.get_distance(), 10)
         n.set_distance(20)
         self.assertEqual(n.get_distance(), 20)
+        with self.assertRaises(DistanceLenghtError):
+            n.set_distance(-1)
 
     def test_next_prev(self):
         n = Node("StationA", 10)
