@@ -237,7 +237,7 @@ def load(trainlist):
                 except TypeTypeError:
                     print("Chyba: Typ vlaku musí být řetězec.")
                 except TrainTypeError:
-                    print(f"Chyba: Typ vlaku '{i['type']}' není povolen.")
+                    print(f"Chyba: Typ vlaku '{i['typ_vlaku']}' není povolen.")
                 except TrainNumberTypeError:
                     print("Chyba: Číslo vlaku musí být celé číslo.")
                 except TrainNumberLenghtError:
@@ -262,30 +262,35 @@ def load(trainlist):
                     print("Chyba: Spotřeba musí být větší než nula.")
                 except json.JSONDecodeError:
                     print("Chyba: Nelze přečíst nebo zpracovat 'config.json'.")
+                except KeyError as e:
+                    print(f"Chyba: U vlaku chybý {e}")
                 except Exception as e:
                     print(f"Neočekávaná chyba: {e}")
-                trainlist.append(t)
-                try:
-                    for x in i["stanice"]:
-                        t.addstation(x["jmeno"],x["vzdalenost"])
-                except EmptyInputError:
-                    print("Chyba: Chybí vstupní hodnoty (data nebo vzdálenost).")
-                except DataTypeError:
-                    print("Chyba: Jméno zastávky musí být písmena.")
-                except DataLenghtError:
-                    print("Chyba: Jméno zastávky musí být minimálně 3 znaky dlouhé.")
-                except DistanceTypeError:
-                    print("Chyba: Vzdálenost musí být celé číslo.")
-                except DistanceLenghtError:
-                    print("Chyba: Vzdálenost nemůže být záporná.")
-                except NextNodeError:
-                    print("Chyba: Následující uzel není platný (musí být Node nebo None).")
-                except PrevNodeError:
-                    print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
-                except DuplicateStationError:
-                    print("Chyba: Stanice nesmí mýt duplikátní jméno")
-                except Exception as e:
-                    print(f"Neočekávaná chyba: {e}")
+                else:
+                    trainlist.append(t)
+                    try:
+                        for x in i["stanice"]:
+                            t.addstation(x["jmeno"],x["vzdalenost"])
+                    except EmptyInputError:
+                        print("Chyba: Chybí vstupní hodnoty (data nebo vzdálenost).")
+                    except DataTypeError:
+                        print("Chyba: Jméno zastávky musí být písmena.")
+                    except DataLenghtError:
+                        print("Chyba: Jméno zastávky musí být minimálně 3 znaky dlouhé.")
+                    except DistanceTypeError:
+                        print("Chyba: Vzdálenost musí být celé číslo.")
+                    except DistanceLenghtError:
+                        print("Chyba: Vzdálenost nemůže být záporná.")
+                    except NextNodeError:
+                        print("Chyba: Následující uzel není platný (musí být Node nebo None).")
+                    except PrevNodeError:
+                        print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
+                    except DuplicateStationError:
+                        print("Chyba: Stanice nesmí mýt duplikátní jméno")
+                    except KeyError as e:
+                        print(f"Chyba: U stanice chybý {e}")
+                    except Exception as e:
+                        print(f"Neočekávaná chyba: {e}")
     except json.JSONDecodeError:
         print("Špatný format souboru trains.json")
     except FormatError:

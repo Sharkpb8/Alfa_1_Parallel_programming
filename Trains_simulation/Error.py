@@ -1,8 +1,4 @@
-class LenghtError(Exception):
-    pass
-class FormatError(Exception):
-    pass
-
+#error for Node
 class DataTypeError(Exception):
     pass
 class DataLenghtError(Exception):
@@ -16,6 +12,7 @@ class NextNodeError(Exception):
 class PrevNodeError(Exception):
     pass
 
+#errors for Linkedlist
 class HeadError(Exception):
     pass
 class TailError(Exception):
@@ -25,6 +22,7 @@ class NodeError(Exception):
 class DuplicateStationError(Exception):
     pass
 
+#errors for Train
 class TypeTypeError(Exception):
     pass
 class TrainTypeError(Exception):
@@ -62,5 +60,8 @@ class EmptyInputError(Exception):
 class LowFuelError(Exception):
     pass
 
+#errors for main
 class ChoiceError(Exception):
+    pass
+class FormatError(Exception):
     pass
