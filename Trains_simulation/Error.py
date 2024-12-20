@@ -59,6 +59,8 @@ class EmptyInputError(Exception):
     pass
 class LowFuelError(Exception):
     pass
+class NotReachableStationError(Exception):
+    pass
 
 #errors for main
 class ChoiceError(Exception):

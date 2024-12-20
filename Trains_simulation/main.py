@@ -94,6 +94,17 @@ def addtrain():
             return t
 
 def picktrain(trainlist,prompt):
+    """
+    Prompts the user to select a train from a list, either by its position in the list (integer input)
+    or by its unique identifier (string input). If the input is invalid, the user is prompted to try again.
+
+    :param trainlist: A list of train objects to choose from.
+    :type trainlist: list
+    :param prompt: A message to display when prompting the user for input.
+    :type prompt: str
+    :return: The selected train object from the list.
+    :rtype: object
+    """
     while True:
         print(prompt)
         showotrainptions(trainlist)
@@ -135,7 +146,6 @@ def addstation(trainlist):
         t = picktrain(trainlist,"Pro který vlak chce přidat stanici ?")
         while runningstation:
             try:
-                #add limit where if the train can reach destination it will not be added and it will raise error
                 newstation["Name"] = convert_input(input("Jmeno zastavky: "))
                 newstation["Distance"] = convert_input(input("Vzdálenost do zastávky (km): "))
                 t.addstation(newstation["Name"],newstation["Distance"])
@@ -155,6 +165,8 @@ def addstation(trainlist):
                 print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
             except DuplicateStationError:
                 print("Chyba: Zastávka musí mít unikátní jméno pro tuto trať")
+            except NotReachableStationError:
+                print("Chyba: Tato stanice by nebylo mozna dosáhnout s tímto vlakem")
             except Exception as e:
                 print(f"Neočekávaná chyba: {e}")
             else:
@@ -164,6 +176,7 @@ def addstation(trainlist):
 def deletetrain(trainlist):
     """
     Deletes train by choice
+
     :param trainlist: train list from where to delete train  
     """
     optionpicked = False
@@ -325,7 +338,7 @@ def Run():
                 if(len(trainlist) == 0):
                     print("Žádny vlaky nebyly vytvořeny")
                 else:
-                    station = addstation(trainlist)
+                    addstation(trainlist)
             case "Smazat zastavku vlaku" | "4":
                 emptytrains = True
                 for i in trainlist:

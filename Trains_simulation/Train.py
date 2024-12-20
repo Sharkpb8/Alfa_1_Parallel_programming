@@ -98,6 +98,8 @@ class Train():
         """
         if(name is None or distance is None):
             raise EmptyInputError
+        if(not self.isreachable(distance)):
+            raise NotReachableStationError
         self.tracks.addhead(name,distance)
     
     def removestation(self,name = None):
@@ -314,7 +316,20 @@ class Train():
                 self.current_passangers.remove(i)
                 count +=1
         await log(f"Z vlaku vystoupilo {count} cestujících",t)
-            
+    
+    def isreachable(self,travel):
+        """
+        Determines whether a station is possible to reach with the maximum fuel level and the fuel consumption rate.
+
+        :param travel: The distance to be traveled.
+        :type travel:int
+        :return: True if reachable, False if not.
+        :rtype: bool
+        """
+        if(self.fuel -travel*self.consumption<0):
+            return False
+        else:
+            return True
     
     def __str__(self):
         """
