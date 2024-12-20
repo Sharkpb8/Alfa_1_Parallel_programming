@@ -1,4 +1,4 @@
-from DoublyLinkedList import *
+from src.DoublyLinkedList import *
 import json
 import asyncio
 

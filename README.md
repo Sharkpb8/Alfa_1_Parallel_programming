@@ -6,6 +6,7 @@
 
 **Date of Completion:** 20.12.2024  
 **Institution:** Střední průmyslová škola elektrotechnická, Praha 2, Ječná 30  
+**Type of project:** School project
 
 ---
 
@@ -60,7 +61,41 @@ Configurations are set in `config.json`:
 Refer to `config.json` for valid configurations.
 
 ---
+## Documentation and Reporting
+## Description
+### Overview
+The Train Simulation Program allows users to:
+- Add and remove trains.
+- Add and remove stations for each train.
+- Simulate train journeys with logs, delays, and fuel management.
 
+### How It Works
+1. **Menu**:
+   - The user selects actions like adding trains, managing stations, or starting a simulation.
+2. **Train Management**:
+   - Add trains with attributes like speed, capacity, and fuel.
+   - Delete trains when they’re no longer needed.
+3. **Station Management**:
+   - Add stations to a train’s route with distances.
+   - Remove stations if needed.
+4. **Simulation**:
+   - Runs a journey for the trains, logging actions like movement, delays, and refueling.
+
+Logs are saved in the `/logs/` folder, and train configurations can be loaded from `trains.json`.
+
+## Testing
+Unit testing results shows 97% coverage
+
+## Sources and consulted
+- ChatGPT
+- Wikipedia
+- W3Schools
+- GeeksforGeeks
+- Python Docs
+- Martin Hornych
+- Tomáš Križko
+- Ondra Kábrt
+---
 ## Installation and Execution
 ### Prerequisites
 - Python 3.x installed.

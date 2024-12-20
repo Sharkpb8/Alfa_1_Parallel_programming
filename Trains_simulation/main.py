@@ -1,5 +1,5 @@
-from Train import *
-from simulation import *
+from src.Train import *
+from src.simulation import *
 import json
 import asyncio
 import ast

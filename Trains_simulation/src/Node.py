@@ -1,4 +1,4 @@
-from Error import *
+from src.Error import *
 
 class Node():
     def __init__(self, data = None, distance = None, next_node=None, prev_node=None):
