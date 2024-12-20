@@ -100,7 +100,16 @@ Unit testing results shows 97% coverage
 ### Requirements
 - Python 3.x installed.
 
-### Steps
+### Code Build
+1. Clone the project from `https://github.com/Sharkpb8/Alfa_1_Parallel_programming`.
+2. Execute these comands:
+   - python3 -m venv venv
+   - cd ./venv/Scripts
+   - ./pip.exe install asyncio
+3. Start `Main.py`
+
+
+### Execution
 1. Download the project release from `https://github.com/Sharkpb8/Alfa_1_Parallel_programming`.
 2. Start `Main.exe`.
 3. Add trains manualy or from file
