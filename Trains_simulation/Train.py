@@ -226,7 +226,10 @@ class Train():
             raise FuelTypeError
         if(not isinstance(newfuel,int)):
             raise FuelTypeError
-        self.current_fuel += newfuel
+        if(self.current_fuel +newfuel>self.fuel):
+            self.current_fuel = self.fuel
+        else:
+            self.current_fuel += newfuel
 
     def consumefuel(self,distance = None):
         """
