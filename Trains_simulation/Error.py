@@ -67,3 +67,13 @@ class ChoiceError(Exception):
     pass
 class FormatError(Exception):
     pass
+
+#errors for config
+class ConfigDictionaryError(Exception):
+    pass
+class ConfigListError(Exception):
+    pass
+class ConfigTrainTypeError(Exception):
+    pass
+class ConfigSimulationDataError(Exception):
+    pass

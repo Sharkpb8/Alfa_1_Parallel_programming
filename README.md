@@ -48,13 +48,13 @@ The application uses a modular structure:
 Configurations are set in `config.json`:
 - `allowedtypes`: List of allowed types of trains.
 - simulation
-  - `mimimum-delay` and `maximum-delay`: Minimum and maximum delay of train.
-  - `delay-chance`: Probability of a delay of train.
-  - `min-fill` and `max-fill`: Minimum and maximum passangers that can be loaded.
+  - `mimimum-delay` and `maximum-delay`: Minimum and maximum delay of train. (Cant use decimal number)
+  - `delay-chance`: Probability of a delay of train. (Cant use decimal number)
+  - `min-fill` and `max-fill`: Minimum and maximum passangers that can be loaded. (Cant use decimal number)
   - `geton-time`: Time in S to load on passangers.
   - `getoff-time`: Time in S to load off passangers.
-  - `fuel-time`: Time taken for refueling.
-  - `max-refuel`: Maximum addicional ammount of fuel in % to be added to train when refueling
+  - `fuel-time`: Time taken for refueling. (Cant use decimal number)
+  - `max-refuel`: Maximum addicional ammount of fuel in % to be added to train when refueling (Cant use decimal number)
 
 Refer to `config.json` for valid configurations.
 

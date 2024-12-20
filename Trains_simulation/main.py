@@ -43,6 +43,22 @@ def convert_input(value):
     except (ValueError, SyntaxError):
         return value
 
+def check_config():
+    with open("./Trains_simulation/config.json","r") as j:
+        config = json.load(j)
+        if(not isinstance(config,dict)):
+            raise ConfigDictionaryError
+        if(not isinstance(config["allowedtypes"],list)):
+            raise ConfigListError
+        for i in config["allowedtypes"]:
+            if(not isinstance(i,str)):
+                raise ConfigTrainTypeError
+        simulation = config["simulation"]
+        for i in simulation.values():
+            if(not isinstance(i,(int,float))):
+                raise ConfigSimulationDataError
+        
+
 def addtrain():
     """
     Creates new train based on user input
@@ -358,7 +374,20 @@ def Run():
                 if(len(trainlist) == 0):
                     print("Žádny vlaky nebyly vytvořeny")
                 else:
-                    asyncio.run(main(trainlist))
+                    try:
+                        check_config()
+                    except json.JSONDecodeError:
+                        print("Chyba: Nelze přečíst nebo zpracovat 'config.json'.")
+                    except ConfigDictionaryError:
+                        print("Chyba: Config musí být dictionary")
+                    except ConfigListError:
+                        print("Chyba: List povolených typů vlaků musí být list")
+                    except ConfigSimulationDataError:
+                        print("Chyba: Špatný datový typ pro hodnoty v simulaci")
+                    except ConfigTrainTypeError:
+                        print("Chyba: Povolený typ vlaku musí být písmena")
+                    else:
+                        asyncio.run(main(trainlist))
             case "Načíst ze souboru" | "7":
                 load(trainlist)
             case "Ukončit" | "8":
