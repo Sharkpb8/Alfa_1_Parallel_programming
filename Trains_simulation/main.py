@@ -100,7 +100,7 @@ def picktrain(trainlist,prompt):
         choice = input("Vybírám si: ")
         try:
             numberchoise = int(choice)
-            if(len(trainlist)<numberchoise or numberchoise == 0):
+            if(len(trainlist)<numberchoise or numberchoise <= 0):
                 raise ChoiceError
             t = trainlist[numberchoise-1]
             return t
@@ -121,6 +121,7 @@ def picktrain(trainlist,prompt):
         except ChoiceError:
             print("Špatná volba")
 
+
 def addstation(trainlist):
     """
     creates new station for specific train
@@ -131,79 +132,34 @@ def addstation(trainlist):
     running = True
     runningstation = True
     while running:
-        print("Pro který vlak chce přidat stanici ?")
-        showotrainptions(trainlist)
-        choice = input("Vybírám si: ")
-        try:
-            numberchoise = int(choice)
-            t = trainlist[numberchoise-1]
-            if(len(trainlist)<numberchoise or numberchoise == 0):
-                raise ChoiceError
+        t = picktrain(trainlist,"Pro který vlak chce přidat stanici ?")
+        while runningstation:
+            try:
+                #add limit where if the train can reach destination it will not be added and it will raise error
+                newstation["Name"] = convert_input(input("Jmeno zastavky: "))
+                newstation["Distance"] = convert_input(input("Vzdálenost do zastávky (km): "))
+                t.addstation(newstation["Name"],newstation["Distance"])
+            except EmptyInputError:
+                print("Chyba: Chybí vstupní hodnoty (data nebo vzdálenost).")
+            except DataTypeError:
+                print("Chyba: Jméno zastávky musí být písmena.")
+            except DataLenghtError:
+                print("Chyba: Jméno zastávky musí být minimálně 3 znaky dlouhé.")
+            except DistanceTypeError:
+                print("Chyba: Vzdálenost musí být celé číslo.")
+            except DistanceLenghtError:
+                print("Chyba: Vzdálenost nemůže být záporná.")
+            except NextNodeError:
+                print("Chyba: Následující uzel není platný (musí být Node nebo None).")
+            except PrevNodeError:
+                print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
+            except DuplicateStationError:
+                print("Chyba: Zastávka musí mít unikátní jméno pro tuto trať")
+            except Exception as e:
+                print(f"Neočekávaná chyba: {e}")
             else:
-                while runningstation:
-                    try:
-                        #shorten
-                        #add limit where if the train can reach destination it will not be added and it will raise error
-                        newstation["Name"] = convert_input(input("Jmeno zastavky: "))
-                        newstation["Distance"] = convert_input(input("Vzdálenost do zastávky (km): "))
-                        t.addstation(newstation["Name"],newstation["Distance"])
-                    except EmptyInputError:
-                        print("Chyba: Chybí vstupní hodnoty (data nebo vzdálenost).")
-                    except DataTypeError:
-                        print("Chyba: Jméno zastávky musí být písmena.")
-                    except DataLenghtError:
-                        print("Chyba: Jméno zastávky musí být minimálně 3 znaky dlouhé.")
-                    except DistanceTypeError:
-                        print("Chyba: Vzdálenost musí být celé číslo.")
-                    except DistanceLenghtError:
-                        print("Chyba: Vzdálenost nemůže být záporná.")
-                    except NextNodeError:
-                        print("Chyba: Následující uzel není platný (musí být Node nebo None).")
-                    except PrevNodeError:
-                        print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
-                    except Exception as e:
-                        print(f"Neočekávaná chyba: {e}")
-                    else:
-                        running = False
-                        break
-        except ValueError:
-            temptrainlist = []
-            showotrainptions(trainlist)
-            count = 0
-            for i in temptrainlist:
-                if(choice == i):
-                    t = trainlist[count]
-                    while runningstation:
-                        try:
-                            newstation["Name"] = convert_input(input("Jmeno zastavky: "))
-                            newstation["Distance"] = convert_input(input("Vzdálenost do zastávky (km): "))
-                            t.addstation(newstation["Name"],newstation["Distance"])
-                        except EmptyInputError:
-                            print("Chyba: Chybí vstupní hodnoty (data nebo vzdálenost).")
-                        except DataTypeError:
-                            print("Chyba: Jméno zastávky musí být písmena.")
-                        except DataLenghtError:
-                            print("Chyba: Jméno zastávky musí být minimálně 3 znaky dlouhé.")
-                        except DistanceTypeError:
-                            print("Chyba: Vzdálenost musí být celé číslo.")
-                        except DistanceLenghtError:
-                            print("Chyba: Vzdálenost nemůže být záporná.")
-                        except NextNodeError:
-                            print("Chyba: Následující uzel není platný (musí být Node nebo None).")
-                        except PrevNodeError:
-                            print("Chyba: Předchozí uzel není platný (musí být Node nebo None).")
-                        except DuplicateStationError:
-                            print("Chyba: Stanice nesmí mýt duplikátní jméno")
-                        except Exception as e:
-                            print(f"Neočekávaná chyba: {e}")
-                        else:
-                            running = False
-                            break
-                else:
-                    count +=1
-            print("Neplatný výběr vlaku")
-        except ChoiceError:
-            print("Neplatný výběr vlaku")
+                running = False
+                break
 
 def deletetrain(trainlist):
     """
@@ -217,7 +173,7 @@ def deletetrain(trainlist):
         choice = input("Vybírám si: ")
         try:
             numberchoise = int(choice)
-            if(len(trainlist)<numberchoise or numberchoise == 0):
+            if(len(trainlist)<numberchoise or numberchoise <= 0):
                 raise ChoiceError
             del trainlist[numberchoise-1]
             return trainlist
@@ -238,6 +194,7 @@ def deletetrain(trainlist):
         except ChoiceError:
             print("Špatná volba")
     
+
 def removestation(trainlist):
     """
     Removes station from train
@@ -252,7 +209,7 @@ def removestation(trainlist):
             choice = input("Vybírám si: ")
             try:
                 numberchoise = int(choice)
-                if(len(t.getallstations())<numberchoise or numberchoise == 0):
+                if(len(t.getallstations())<numberchoise or numberchoise <= 0):
                     raise ChoiceError
                 t.removestation(stations[numberchoise-1])
                 break
@@ -261,8 +218,6 @@ def removestation(trainlist):
                     t.removestation(choice)
                     break
             except ChoiceError:
-                print("Špatná volba")
-            if(not optionpicked):
                 print("Špatná volba")
 
 
