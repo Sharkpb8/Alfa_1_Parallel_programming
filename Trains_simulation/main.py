@@ -57,6 +57,8 @@ def check_config():
         for i in simulation.values():
             if(not isinstance(i,(int,float))):
                 raise ConfigSimulationDataError
+            if(isinstance(i,bool)):
+                raise ConfigSimulationDataError
         
 
 def addtrain():
