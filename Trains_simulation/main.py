@@ -396,4 +396,5 @@ def Run():
                 print("Špatná volba")
         print("")
 
-Run()
+if __name__ == "__main__":
+    Run()
