@@ -25,9 +25,9 @@ async def log(text,t):
     :param t: The train instance.
     :type t: Train
     """
-    if(os.path.isdir("./Trains_simulation/logs") == False):
-        os.mkdir("./Trains_simulation/logs")
-    with open(f"./Trains_simulation/logs/{t.concat()}.txt", "a",encoding="utf-8") as log_file:
+    if(os.path.isdir("./logs") == False):
+        os.mkdir("./logs")
+    with open(f"./logs/{t.concat()}.txt", "a",encoding="utf-8") as log_file:
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_file.write(f"[{timestamp}]: {text}\n")        
 
