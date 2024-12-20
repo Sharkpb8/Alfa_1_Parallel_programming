@@ -3,3 +3,6 @@ __pycache__
 cloc-2.00.exe
 logs
 .coverage
+build
+dist
+main.spec
