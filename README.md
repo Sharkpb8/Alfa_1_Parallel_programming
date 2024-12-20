@@ -97,12 +97,14 @@ Unit testing results shows 97% coverage
 - Ondra Kábrt
 ---
 ## Installation and Execution
-### Prerequisites
+### Requirements
 - Python 3.x installed.
 
 ### Steps
-1. Clone or download the repository.
-2. Navigate to the project directory.
-3. Run `main.py`:
+1. Download the project release from `https://github.com/Sharkpb8/Alfa_1_Parallel_programming`.
+2. Start `Main.exe`.
+3. Add trains manualy or from file
+4. start simulation
+5. in logs there will be log for each train about its informations
 
 
