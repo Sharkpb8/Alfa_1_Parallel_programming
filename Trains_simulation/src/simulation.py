@@ -11,7 +11,7 @@ def openjson():
     :return: The simulation configuration.
     :rtype: dict
     """
-    with open("./Trains_simulation/config.json","r") as j:
+    with open("./config.json","r") as j:
         config = json.load(j)
         simulation = config["simulation"]
         return simulation

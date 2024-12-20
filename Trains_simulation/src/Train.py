@@ -38,7 +38,7 @@ class Train():
         """
         if(not isinstance(type,str)):
             raise TypeTypeError
-        with open("./Trains_simulation/config.json","r") as j:
+        with open("./config.json","r") as j:
             config = json.load(j)
             allowedtypes = config["allowedtypes"]
         if(type not in allowedtypes):

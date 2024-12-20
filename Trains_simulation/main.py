@@ -44,7 +44,7 @@ def convert_input(value):
         return value
 
 def check_config():
-    with open("./Trains_simulation/config.json","r") as j:
+    with open("./config.json","r") as j:
         config = json.load(j)
         if(not isinstance(config,dict)):
             raise ConfigDictionaryError
@@ -256,7 +256,7 @@ def load(trainlist):
     :param trainlist: trainlist where to insert trains  
     """
     try:
-        with open("./Trains_simulation/trains.json","r",encoding="utf-8") as j:
+        with open("./trains.json","r",encoding="utf-8") as j:
             loadlist = json.load(j)
             if(len(loadlist) == 0):
                 return print("V souboru trains.json se nic nenachází")
@@ -321,7 +321,9 @@ def load(trainlist):
                     except Exception as e:
                         print(f"Neočekávaná chyba: {e}")
     except json.JSONDecodeError:
-        print("Špatný format souboru trains.json")
+        print("Chyba: Špatný format souboru trains.json")
+    except FileNotFoundError:
+        print("Chyba: Složka trains.json nebyla vytvořena")
     except FormatError:
         print("Format vlaku je špatný")
         
@@ -386,6 +388,8 @@ def Run():
                         print("Chyba: Špatný datový typ pro hodnoty v simulaci")
                     except ConfigTrainTypeError:
                         print("Chyba: Povolený typ vlaku musí být písmena")
+                    except FileNotFoundError:
+                        print("Chyba: Soubor config.json nebyl vytvořen")
                     else:
                         asyncio.run(main(trainlist))
             case "Načíst ze souboru" | "7":
