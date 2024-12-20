@@ -45,23 +45,33 @@ class Train():
             raise TrainTypeError
         if(not isinstance(train_number,int)):
             raise TrainNumberTypeError
+        if(isinstance(train_number,bool)):
+            raise TrainNumberTypeError
         if(train_number < 1000 or train_number > 9999):
             raise TrainNumberLenghtError
         if(not isinstance(tracks,LinkedList)):
             raise TracksTypeError
         if(not isinstance(speed,int)):
             raise SpeedTypeError
+        if(isinstance(speed,bool)):
+            raise SpeedTypeError
         if(speed<=0):
             raise SpeedError
         if(not isinstance(capacity,int)):
+            raise CapacityTypeError
+        if(isinstance(capacity,bool)):
             raise CapacityTypeError
         if(capacity<=0):
             raise CapacityError
         if(not isinstance(fuel,int)):
             raise FuelTypeError
+        if(isinstance(fuel,bool)):
+            raise FuelTypeError
         if(fuel<=0):
             raise FuelError
         if(not isinstance(consumption,int)):
+            raise ConsumptionTypeError
+        if(isinstance(consumption,bool)):
             raise ConsumptionTypeError
         if(consumption<=0):
             raise ConsumptionError

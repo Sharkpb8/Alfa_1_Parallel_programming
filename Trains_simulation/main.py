@@ -61,7 +61,7 @@ def addtrain():
         try:
             t = Train(newtrain["type"],newtrain["train_number"],newtrain["speed"],newtrain["capacity"],newtrain["fuel"],newtrain["consumption"],LinkedList())
         except TypeTypeError:
-            print("Chyba: Typ vlaku musí být řetězec.")
+            print("Chyba: Typ vlaku musí být písmena.")
         except TrainTypeError:
             print(f"Chyba: Typ vlaku '{newtrain['type']}' není povolen.")
         except TrainNumberTypeError:
@@ -93,6 +93,33 @@ def addtrain():
         else:
             return t
 
+def picktrain(trainlist,prompt):
+    while True:
+        print(prompt)
+        showotrainptions(trainlist)
+        choice = input("Vybírám si: ")
+        try:
+            numberchoise = int(choice)
+            if(len(trainlist)<numberchoise or numberchoise == 0):
+                raise ChoiceError
+            t = trainlist[numberchoise-1]
+            return t
+        except ValueError:
+            temptrainlist = []
+            count = 0
+            for i in trainlist:
+                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
+                count +=1
+            count = 0
+            for i in temptrainlist:
+                if(choice == i):
+                    t = trainlist[count]
+                    return t
+                else:
+                    count +=1
+            print("Špatná volba")
+        except ChoiceError:
+            print("Špatná volba")
 
 def addstation(trainlist):
     """
@@ -110,11 +137,13 @@ def addstation(trainlist):
         try:
             numberchoise = int(choice)
             t = trainlist[numberchoise-1]
-            if(len(trainlist)<numberchoise):
-                raise Exception
+            if(len(trainlist)<numberchoise or numberchoise == 0):
+                raise ChoiceError
             else:
                 while runningstation:
                     try:
+                        #shorten
+                        #add limit where if the train can reach destination it will not be added and it will raise error
                         newstation["Name"] = convert_input(input("Jmeno zastavky: "))
                         newstation["Distance"] = convert_input(input("Vzdálenost do zastávky (km): "))
                         t.addstation(newstation["Name"],newstation["Distance"])
@@ -173,7 +202,7 @@ def addstation(trainlist):
                 else:
                     count +=1
             print("Neplatný výběr vlaku")
-        except Exception:
+        except ChoiceError:
             print("Neplatný výběr vlaku")
 
 def deletetrain(trainlist):
@@ -188,6 +217,8 @@ def deletetrain(trainlist):
         choice = input("Vybírám si: ")
         try:
             numberchoise = int(choice)
+            if(len(trainlist)<numberchoise or numberchoise == 0):
+                raise ChoiceError
             del trainlist[numberchoise-1]
             return trainlist
         except ValueError:
@@ -203,8 +234,9 @@ def deletetrain(trainlist):
                     return trainlist
                 else:
                     count +=1
-            # print("dej tam cislo jsem linej to tet implementovat")
-        print("Špatná volba")
+            print("Špatná volba")
+        except ChoiceError:
+            print("Špatná volba")
     
 def removestation(trainlist):
     """
@@ -213,51 +245,26 @@ def removestation(trainlist):
     :param trainlist: trainlist from where to delete train  
     """
     optionpicked = False
+    t = picktrain(trainlist,"Pro který vlak chce smazat stanici ?")
     while not optionpicked:
-        print("Pro který vlak chce smazat stanici ?")
-        showotrainptions(trainlist)
-        choice = input("Vybírám si: ")
-        try:
-            numberchoise = int(choice)
-            t = trainlist[numberchoise-1]
             stations = t.getallstations()
             showoptions(stations)
             choice = input("Vybírám si: ")
             try:
                 numberchoise = int(choice)
+                if(len(t.getallstations())<numberchoise or numberchoise == 0):
+                    raise ChoiceError
                 t.removestation(stations[numberchoise-1])
                 break
             except ValueError:
                 if(choice in stations):
                     t.removestation(choice)
                     break
-        except ValueError:
-            temptrainlist = []
-            count = 0
-            for i in trainlist:
-                temptrainlist.append(f"{trainlist[count-1].type}{trainlist[count-1].train_number}")
-                count +=1
-            count = 0
-            for i in temptrainlist:
-                if(choice == i):
-                    t = trainlist[count]
-                    stations = t.getallstations()
-                    showoptions(stations)
-                    choice = input("Vybírám si: ")
-                    try:
-                        numberchoise = int(choice)
-                        t.removestation(stations[numberchoise-1])
-                        optionpicked = True
-                        break
-                    except ValueError:
-                        if(choice in stations):
-                            t.removestation(choice)
-                            optionpicked = True
-                            break
-                else:
-                    count +=1
-        if(not optionpicked):
-            print("Špatná volba")
+            except ChoiceError:
+                print("Špatná volba")
+            if(not optionpicked):
+                print("Špatná volba")
+
 
 def load(trainlist):
     """
@@ -360,7 +367,14 @@ def Run():
                 else:
                     station = addstation(trainlist)
             case "Smazat zastavku vlaku" | "4":
-                removestation(trainlist)
+                emptytrains = True
+                for i in trainlist:
+                    if (len(i.getallstations())>=1):
+                        emptytrains = False
+                if(emptytrains):
+                    print("Všechny vlaky nemají stanice")
+                else:
+                    removestation(trainlist)
             case "Vypis vlaku" | "5":
                 if(len(trainlist) == 0):
                     print("Žádny vlaky nebyly vytvořeny")

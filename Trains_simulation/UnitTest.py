@@ -177,9 +177,9 @@ class TestTrain(unittest.TestCase):
             Train("R", -1, 100, 50, 200, 10, LinkedList())
         with self.assertRaises(TrainNumberLenghtError):
             Train("R", 808080, 100, 50, 200, 10, LinkedList())
-        with self.assertRaises(TrainNumberLenghtError):
+        with self.assertRaises(TrainNumberTypeError):
             Train("R", False, 100, 50, 200, 10, LinkedList())
-        with self.assertRaises(TrainNumberLenghtError):
+        with self.assertRaises(TrainNumberTypeError):
             Train("R", True, 100, 50, 200, 10, LinkedList())
         with self.assertRaises(TrainNumberLenghtError):
             Train("R", -5000, 100, 50, 200, 10, LinkedList())
@@ -193,7 +193,7 @@ class TestTrain(unittest.TestCase):
             Train("R", 1234, 5.5, 50, 200, 10, LinkedList())
         with self.assertRaises(SpeedTypeError):
             Train("R", 1234, None, 50, 200, 10, LinkedList())
-        with self.assertRaises(SpeedError):
+        with self.assertRaises(SpeedTypeError):
             Train("R", 1234, False, 50, 200, 10, LinkedList())
         with self.assertRaises(SpeedError):
             Train("R", 1234, -50, 50, 200, 10, LinkedList())
@@ -207,7 +207,7 @@ class TestTrain(unittest.TestCase):
             Train("R", 1234, 100, 5.5, 200, 10, LinkedList())
         with self.assertRaises(CapacityTypeError):
             Train("R", 1234, 100, None, 200, 10, LinkedList())
-        with self.assertRaises(CapacityError):
+        with self.assertRaises(CapacityTypeError):
             Train("R", 1234, 100, False, 200, 10, LinkedList())
         with self.assertRaises(CapacityError):
             Train("R", 1234, 100, -50, 200, 10, LinkedList())
@@ -221,7 +221,7 @@ class TestTrain(unittest.TestCase):
             Train("R", 1234, 100, 50, 5.5, 10, LinkedList())
         with self.assertRaises(FuelTypeError):
             Train("R", 1234, 100, 50, None, 10, LinkedList())
-        with self.assertRaises(FuelError):
+        with self.assertRaises(FuelTypeError):
             Train("R", 1234, 100, 50, False, 10, LinkedList())
         with self.assertRaises(FuelError):
             Train("R", 1234, 100, 50, -5000, 10, LinkedList())  

@@ -61,3 +61,6 @@ class EmptyInputError(Exception):
     pass
 class LowFuelError(Exception):
     pass
+
+class ChoiceError(Exception):
+    pass
