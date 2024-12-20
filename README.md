@@ -3,6 +3,7 @@
 ## Author
 **Name:** Adam Hlaváčik  
 **Contact:** hlavacik@spsejecna.cz
+
 **Date of Completion:** 20.12.2024  
 **Institution:** Střední průmyslová škola elektrotechnická, Praha 2, Ječná 30  
 
@@ -48,13 +49,13 @@ The application uses a modular structure:
 Configurations are set in `config.json`:
 - `allowedtypes`: List of allowed types of trains.
 - simulation
-  - `mimimum-delay` and `maximum-delay`: Minimum and maximum delay of train. (Cant use decimal number)
-  - `delay-chance`: Probability of a delay of train. (Cant use decimal number)
-  - `min-fill` and `max-fill`: Minimum and maximum passangers that can be loaded. (Cant use decimal number)
+  - `mimimum-delay` and `maximum-delay`: Minimum and maximum delay of train. (Cant use decimal numbers)
+  - `delay-chance`: Probability of a delay of train. (Cant use decimal numbers)
+  - `min-fill` and `max-fill`: Minimum and maximum passangers that can be loaded. (Cant use decimal numbers)
   - `geton-time`: Time in S to load on passangers.
   - `getoff-time`: Time in S to load off passangers.
-  - `fuel-time`: Time taken for refueling. (Cant use decimal number)
-  - `max-refuel`: Maximum addicional ammount of fuel in % to be added to train when refueling (Cant use decimal number)
+  - `fuel-time`: Time taken for refueling. (Cant use decimal numbers)
+  - `max-refuel`: Maximum addicional ammount of fuel in % to be added to train when refueling (Cant use decimal numbers)
 
 Refer to `config.json` for valid configurations.
 
